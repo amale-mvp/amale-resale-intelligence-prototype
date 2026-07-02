@@ -529,7 +529,7 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 </style>
 </head>
 <body>
-<!-- ═══ Password Gate ═══ -->
+<!-- Password Gate -->
 <div id="amale-gate" style="position:fixed;inset:0;z-index:9999;background:#F5F1EB;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif">
   <div style="text-align:center;max-width:360px;width:100%;padding:20px">
     <div style="width:48px;height:48px;background:#B87333;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:24px;color:white;margin-bottom:18px">A</div>
@@ -715,8 +715,8 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
     <span class="chip active">All Scans</span><span class="chip">High Value</span><span class="chip">Needs Review</span><span class="chip">Completed</span>
   </div>
 
-  <div class="scard" style="padding:0;overflow:hidden">
-    <table class="tbl" style="margin:0">
+  <div class="scard" style="padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <table class="tbl" style="margin:0;min-width:700px">
       <thead>
         <tr><th>Item</th><th>Category</th><th>Value</th><th>Condition</th><th>Recommended</th><th>User Goal</th><th>Confidence</th><th>Status</th></tr>
       </thead>

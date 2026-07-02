@@ -9,6 +9,8 @@
  * Premium, warm, modern — consumer-friendly + enterprise-credible
  */
 
+
+
 :root {
   --bone:        #F5F1EB;
   --charcoal:    #1F2A24;
@@ -427,6 +429,103 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 .action-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: var(--white); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 6px; box-shadow: var(--s); counter-increment: actions; }
 .action-item::before { content: counter(actions); width: 22px; height: 22px; background: var(--copper); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
 .action-item span { font-size: 12px; font-weight: 500; color: var(--charcoal); line-height: 1.5; }
+
+/* ═══ Mobile Menu Toggle ═══ */
+.menu-toggle { display: none; }
+.sidebar-overlay { display: none; }
+
+/* ═══ Responsive: Tablet ═══ */
+@media (max-width: 1024px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .partner-grid { grid-template-columns: repeat(2, 1fr); }
+  .quarter-grid { grid-template-columns: repeat(2, 1fr); }
+  .strategy-cards { grid-template-columns: 1fr; }
+  .mini-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ═══ Responsive: Mobile ═══ */
+@media (max-width: 768px) {
+  html, body { overflow-x: hidden; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 200;
+    overflow: hidden;
+  }
+  .sidebar.open { transform: translateX(0); overflow-y: auto; }
+  .sidebar-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+    z-index: 150;
+  }
+  .sidebar-overlay.open { display: block; }
+  .main { margin-left: 0; width: 100%; }
+  .menu-toggle {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; background: none; border: 1px solid var(--line);
+    border-radius: 8px; cursor: pointer; flex-shrink: 0;
+  }
+  .menu-toggle svg { width: 20px; height: 20px; stroke: var(--charcoal); fill: none; stroke-width: 2; }
+  .topbar { padding: 12px 16px; gap: 8px; }
+  .tb-title { font-size: 14px; }
+  .content { padding: 16px 16px 40px; }
+  .ph h2 { font-size: 17px; }
+  .ph p { font-size: 12px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .kpi { padding: 14px 16px; }
+  .kpi .kv { font-size: 22px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .pi-split { grid-template-columns: 1fr; }
+  .bench-grid { grid-template-columns: 1fr; }
+  .partner-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .quarter-grid { grid-template-columns: repeat(2, 1fr); }
+  .tbl { font-size: 11px; }
+  .tbl th, .tbl td { padding: 8px 6px; }
+  .tbl .item-cell { gap: 6px; }
+  .tbl .pthumb { width: 28px; height: 28px; font-size: 7px; }
+  .scard { padding: 16px; }
+  .hero-strip { padding: 14px 16px; border-radius: 10px; }
+  .hero-strip-text { font-size: 12px; }
+  .codeblock { font-size: 10px; padding: 14px; }
+  .bar-label { width: 70px; font-size: 10px; }
+
+  /* Strategy pages */
+  .signal-ring { max-width: 100%; }
+  .signal-chip { padding: 8px 12px; font-size: 11px; }
+  .engine-core { max-width: 100%; padding: 20px; }
+  .output-cards { grid-template-columns: 1fr; max-width: 100%; }
+  .two-col-compare { grid-template-columns: 1fr; }
+  .compare-col { padding: 16px; }
+  .loop-flow { gap: 0; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+  .loop-step { min-width: 80px; padding: 10px 12px; font-size: 11px; flex-shrink: 0; }
+  .loop-arrow { padding: 0 3px; font-size: 14px; flex-shrink: 0; }
+  .ecosystem-hub { flex-direction: column; gap: 12px; }
+  .eco-center { width: 100px; height: 100px; }
+  .eco-center .ec-mark { font-size: 20px; }
+  .strategy-cards { grid-template-columns: 1fr; }
+  .mini-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .mini-kpi .mk-v { font-size: 16px; }
+  .status-grid { grid-template-columns: 1fr; }
+  .bottomline { padding: 14px 16px; }
+  .bottomline p { font-size: 12px; }
+  .demo-table { font-size: 11px; }
+  .demo-table th, .demo-table td { padding: 8px 10px; }
+  .insight-item { font-size: 11px; padding: 10px 12px; }
+
+  /* Scrollable tables on mobile */
+  .demo-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px; }
+}
+
+/* ═══ Responsive: Small phone ═══ */
+@media (max-width: 420px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .kpi { padding: 12px; }
+  .kpi .kv { font-size: 20px; }
+  .kpi .kl { font-size: 9px; }
+  .partner-grid { grid-template-columns: 1fr; }
+  .mini-kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .srow { padding: 10px 12px; font-size: 12px; }
+}
 </style>
 </head>
 <body>
@@ -468,8 +567,8 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
   pw.focus();
 })();
 </script>
-<!-- ═══ /Password Gate ═══ -->
 
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <!-- ═══ Sidebar ═══ -->
 <aside class="sidebar">
@@ -506,6 +605,7 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 <!-- ═══ Main ═══ -->
 <div class="main">
   <div class="topbar">
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
     <div class="tb-title">Amalé Intelligence Console</div>
     <div class="tb-right">
       <span class="tb-badge">Live Demo</span>
@@ -1014,7 +1114,7 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
   <!-- Signal Impact Table -->
   <div class="scard" style="padding:0;overflow:hidden">
     <div class="sh" style="padding:14px 18px"><h3>Pricing Signal Breakdown</h3><span class="badge badge-muted">Sample analysis</span></div>
-    <table class="demo-table">
+    <div class="demo-table-wrap"><table class="demo-table">
       <thead><tr><th>Pricing Signal</th><th>Demo Value</th><th>Impact</th></tr></thead>
       <tbody>
         <tr><td>Condition</td><td>4/5 Good</td><td><span class="badge badge-green">Increases confidence</span></td></tr>
@@ -1022,7 +1122,7 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
         <tr><td>Seasonality</td><td>Fall / Winter</td><td><span class="badge badge-green">Increases demand fit</span></td></tr>
         <tr><td>Platform Rules</td><td>thredUP accepted category</td><td><span class="badge badge-brand">Supports recommendation</span></td></tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 
   <div class="bottomline"><p>One item. Multiple signals. One trusted pricing recommendation.</p></div>
@@ -1065,16 +1165,16 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
   </div>
 
   <!-- Sample comparison table -->
-  <div class="scard" style="padding:0;overflow:hidden;margin-bottom:16px">
+  <div class="scard" style="padding:0;margin-bottom:16px">
     <div class="sh" style="padding:14px 18px"><h3>Sample Item Comparison</h3><span class="badge badge-copper">Demo Data</span></div>
-    <table class="demo-table">
+    <div class="demo-table-wrap"><table class="demo-table">
       <thead><tr><th>Item</th><th>Amalé Estimated Range</th><th>thredUP Demo Range</th><th>Confidence</th><th>Recommendation</th></tr></thead>
       <tbody>
         <tr><td>Polo Ralph Lauren Sweater</td><td>$28 – $65</td><td>$28 – $35</td><td><span class="badge badge-green">87%</span></td><td>Least Effort</td></tr>
         <tr><td>Patagonia Fleece</td><td>$42 – $78</td><td>$38 – $52</td><td><span class="badge badge-green">91%</span></td><td>Strong Fit</td></tr>
         <tr><td>Madewell Denim</td><td>$24 – $48</td><td>$22 – $36</td><td><span class="badge badge-green">82%</span></td><td>Good Fit</td></tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 
   <div class="bottomline"><p>The purpose is to test whether Amalé's pricing intelligence can support thredUP resale decisions with clearer item analysis, payout expectations, and goal-based recommendations.</p></div>
@@ -1205,16 +1305,31 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 </div><!-- main -->
 
 <script>
-document.querySelectorAll('.sb-link').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.sb-link').forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-    document.querySelectorAll('.pg').forEach(function(p) { p.classList.remove('active'); });
-    document.getElementById('pg-' + btn.dataset.pg).classList.add('active');
-    document.querySelector('.tb-title').textContent = btn.textContent.trim();
-    window.scrollTo(0, 0);
+(function() {
+  var sidebar = document.querySelector('.sidebar');
+  var overlay = document.getElementById('sidebar-overlay');
+  var toggle = document.getElementById('menu-toggle');
+
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+
+  toggle.addEventListener('click', function() {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
   });
-});
+  overlay.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.sb-link').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.sb-link').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelectorAll('.pg').forEach(function(p) { p.classList.remove('active'); });
+      document.getElementById('pg-' + btn.dataset.pg).classList.add('active');
+      document.querySelector('.tb-title').textContent = btn.textContent.trim();
+      closeSidebar();
+      window.scrollTo(0, 0);
+    });
+  });
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amalé — Intelligence Console</title>
+<style>/*
+ * Amalé Design System v2
+ * Premium, warm, modern — consumer-friendly + enterprise-credible
+ */
+
+
+:root {
+  --bone:        #F5F1EB;
+  --charcoal:    #1F2A24;
+  --green:       #2F4A3C;
+  --green-deep:  #1C3328;
+  --copper:      #B87333;
+  --copper-light:#D4955E;
+  --sand:        #E8E1D8;
+  --line:        #D6CEC4;
+  --white:       #FFFFFF;
+  --bone-dark:   #EDE8E0;
+  --text-sec:    #5C6B62;
+  --text-muted:  #8A9590;
+  --copper-bg:     rgba(184,115,51,0.07);
+  --copper-border: rgba(184,115,51,0.18);
+  --green-bg:      rgba(47,74,60,0.05);
+  --green-border:  rgba(47,74,60,0.12);
+  --green-light:   rgba(47,74,60,0.08);
+  --success:       #3D7A5A;
+  --success-bg:    rgba(61,122,90,0.07);
+  --warning:       #C4882F;
+  --warning-bg:    rgba(196,136,47,0.07);
+  --danger:        #A65240;
+  --danger-bg:     rgba(166,82,64,0.07);
+  --info:          #4A7B8C;
+  --info-bg:       rgba(74,123,140,0.07);
+  --r-xs: 4px; --r-sm: 8px; --r: 12px; --r-lg: 16px; --r-xl: 20px; --r-pill: 100px;
+  --s-xs: 0 1px 2px rgba(31,42,36,0.03);
+  --s:    0 1px 4px rgba(31,42,36,0.05);
+  --s-md: 0 4px 16px rgba(31,42,36,0.07);
+  --s-lg: 0 8px 28px rgba(31,42,36,0.09);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--charcoal);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography: DM Sans for UI, DM Serif Display only for hero prices ── */
+.t-serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+.t-price  { font-family: 'DM Serif Display', serif; font-weight: 400; letter-spacing: -0.5px; }
+
+.badge {
+  display: inline-flex; align-items: center; padding: 3px 9px;
+  border-radius: var(--r-pill); font-size: 10.5px; font-weight: 600; white-space: nowrap;
+}
+.badge-green  { background: var(--success-bg); color: var(--success); }
+.badge-copper { background: var(--copper-bg);  color: var(--copper); }
+.badge-warn   { background: var(--warning-bg); color: var(--warning); }
+.badge-danger { background: var(--danger-bg);  color: var(--danger); }
+.badge-info   { background: var(--info-bg);    color: var(--info); }
+.badge-brand  { background: var(--green-bg);   color: var(--green); }
+.badge-muted  { background: var(--sand);       color: var(--text-sec); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 11px 20px; border-radius: var(--r-sm); border: none;
+  font-size: 13.5px; font-weight: 600; font-family: inherit;
+  cursor: pointer; transition: all 0.15s; text-decoration: none; white-space: nowrap;
+}
+.btn-primary { background: var(--green); color: var(--white); }
+.btn-primary:hover { background: var(--green-deep); }
+.btn-copper  { background: var(--copper); color: var(--white); }
+.btn-copper:hover { opacity: 0.9; }
+.btn-secondary { background: var(--white); color: var(--charcoal); border: 1px solid var(--line); }
+.btn-secondary:hover { background: var(--bone); }
+.btn-ghost { background: transparent; color: var(--text-sec); border: none; }
+.btn-ghost:hover { color: var(--charcoal); }
+.btn-sm { padding: 7px 14px; font-size: 12px; }
+.btn-block { width: 100%; }
+.btn-pill { border-radius: var(--r-pill); }
+
+.card {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--s);
+}
+
+.chip {
+  padding: 6px 14px; border: 1px solid var(--line); border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 500; color: var(--text-sec);
+  background: var(--white); cursor: pointer; transition: all 0.15s;
+}
+.chip:hover { border-color: var(--green); color: var(--green); }
+.chip.active { background: var(--green); border-color: var(--green); color: var(--white); font-weight: 600; }
+
+.toggle { width: 38px; height: 22px; background: var(--line); border-radius: 11px; position: relative; cursor: pointer; }
+.toggle.on { background: var(--green); }
+.toggle::after { content:''; position: absolute; top:3px; left:3px; width:16px; height:16px; background:white; border-radius:50%; transition: transform 0.15s; }
+.toggle.on::after { transform: translateX(16px); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+/* ═══ Shell ═══ */
+body { background: var(--bone); display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 220px; background: var(--green-deep); color: white; position: fixed;
+  top: 0; left: 0; bottom: 0; display: flex; flex-direction: column; z-index: 50;
+}
+.sb-brand { padding: 22px 20px 18px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sb-mark {
+  display: flex; align-items: center; gap: 10px;
+}
+.sb-mark .m {
+  width: 32px; height: 32px; background: var(--copper); border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif; font-size: 17px; color: white;
+}
+.sb-mark .t { font-size: 16px; font-weight: 700; letter-spacing: -0.2px; }
+.sb-mark .s { font-size: 8px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.4); font-weight: 600; }
+
+.sb-nav { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
+.sb-link {
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.55); cursor: pointer;
+  transition: all 0.12s; border: none; background: none; text-align: left; width: 100%;
+  font-family: 'DM Sans', sans-serif;
+}
+.sb-link:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.06); }
+.sb-link.active { color: white; background: rgba(255,255,255,0.1); font-weight: 600; }
+.sb-link svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.6; flex-shrink: 0; }
+
+.sb-foot { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+.sb-foot .env { font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(255,255,255,0.25); font-weight: 600; }
+.sb-foot .ws { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+/* ═══ Main ═══ */
+.main { margin-left: 220px; flex: 1; min-height: 100vh; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 32px; background: var(--white); border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 40;
+}
+.tb-title { font-size: 17px; font-weight: 700; color: var(--charcoal); }
+.tb-right { display: flex; align-items: center; gap: 12px; }
+.tb-badge { padding: 4px 12px; background: var(--success-bg); color: var(--success); border-radius: 100px; font-size: 10px; font-weight: 700; }
+.tb-avatar {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--green);
+  color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+}
+
+.content { padding: 28px 32px 48px; }
+
+/* ═══ Pages ═══ */
+.pg { display: none; }
+.pg.active { display: block; }
+
+/* ═══ KPI Cards ═══ */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.kpi {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.kpi .kl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
+.kpi .kv { font-size: 26px; font-weight: 800; color: var(--charcoal); letter-spacing: -0.5px; line-height: 1; }
+.kpi .kv.green { color: var(--green); }
+.kpi .kv.copper { color: var(--copper); }
+.kpi .kd { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
+.kpi .kd .up { color: var(--success); font-weight: 600; }
+.kpi .kd .down { color: var(--danger); font-weight: 600; }
+
+/* ═══ Section Cards ═══ */
+.scard {
+  background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); margin-bottom: 16px;
+}
+.scard .sh { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.scard .sh h3 { font-size: 14px; font-weight: 700; color: var(--charcoal); }
+.scard .sh .lnk { font-size: 11px; color: var(--copper); font-weight: 600; cursor: pointer; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* ═══ Tables ═══ */
+.tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.tbl th {
+  text-align: left; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--text-muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--line);
+}
+.tbl td { padding: 10px 10px; color: var(--charcoal); border-bottom: 1px solid var(--sand); vertical-align: middle; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: rgba(245,241,235,0.5); }
+.tbl .item-cell { display: flex; align-items: center; gap: 10px; }
+.tbl .pthumb {
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700; color: white; letter-spacing: 0.2px;
+}
+.tbl .pthumb.polo { background: linear-gradient(135deg, #1a3a5c, #2e5a8a); }
+.tbl .pthumb.pat  { background: linear-gradient(135deg, #4a2c6e, #7b5ea7); }
+.tbl .pthumb.levis { background: linear-gradient(135deg, #8b2c1a, #c94432); }
+.tbl .pthumb.lulu { background: linear-gradient(135deg, #6b1a1a, #a63232); }
+.tbl .pthumb.coach { background: linear-gradient(135deg, #8b6914, #c49a2c); }
+.tbl .pthumb.ref  { background: linear-gradient(135deg, #2a5a2a, #4a8c4a); }
+.tbl .pthumb.arc  { background: linear-gradient(135deg, #1a1a2e, #3a3a5c); }
+.tbl .item-name { font-weight: 600; color: var(--charcoal); }
+.tbl .item-meta { font-size: 10.5px; color: var(--text-muted); }
+.tbl .mono { font-family: 'DM Sans', monospace; font-size: 11px; }
+
+/* ═══ Badges ═══ */
+.bdg {
+  display: inline-flex; align-items: center; padding: 3px 9px;
+  border-radius: 100px; font-size: 10px; font-weight: 600; white-space: nowrap;
+}
+.bdg-green { background: var(--success-bg); color: var(--success); }
+.bdg-copper { background: var(--copper-bg); color: var(--copper); }
+.bdg-info { background: var(--info-bg); color: var(--info); }
+.bdg-warn { background: var(--warning-bg); color: var(--warning); }
+.bdg-danger { background: var(--danger-bg); color: var(--danger); }
+.bdg-muted { background: var(--sand); color: var(--text-sec); }
+
+/* ═══ Bar Charts (CSS) ═══ */
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.bar-label { font-size: 11px; font-weight: 500; color: var(--charcoal); width: 90px; text-align: right; flex-shrink: 0; }
+.bar-track { flex: 1; height: 22px; background: var(--sand); border-radius: 6px; overflow: hidden; position: relative; }
+.bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: 10px; font-weight: 600; color: white; }
+.bar-fill.green { background: var(--green); }
+.bar-fill.copper { background: var(--copper); }
+
+/* ═══ Donut-style stat cards ═══ */
+.stat-ring {
+  width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; flex-shrink: 0;
+}
+
+/* ═══ Pricing Intelligence ═══ */
+.pi-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.pi-col {}
+.pi-col h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; margin-bottom: 10px; }
+.pi-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--sand); font-size: 12.5px; }
+.pi-row:last-child { border-bottom: none; }
+.pi-row .l { color: var(--text-sec); }
+.pi-row .v { font-weight: 600; color: var(--charcoal); }
+
+/* ═══ Confidence Gauge ═══ */
+.gauge { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
+.gauge-track { flex: 1; height: 10px; background: var(--sand); border-radius: 5px; overflow: hidden; }
+.gauge-fill { height: 100%; border-radius: 5px; }
+.gauge-val { font-size: 20px; font-weight: 800; min-width: 50px; }
+
+/* ═══ Code Block ═══ */
+.codeblock {
+  background: var(--charcoal); color: #c8d6c0; border-radius: 12px;
+  padding: 18px 20px; font-family: 'DM Sans', monospace; font-size: 12px;
+  line-height: 1.7; overflow-x: auto; margin-bottom: 12px; white-space: pre;
+}
+.codeblock .k { color: var(--copper-light); }
+.codeblock .s { color: #8bc68b; }
+.codeblock .c { color: #6a7a62; }
+
+/* ═══ Report Cards ═══ */
+.rcard {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rcard .ri { font-size: 22px; }
+.rcard .rn { font-size: 13px; font-weight: 700; color: var(--charcoal); }
+.rcard .rd { font-size: 11px; color: var(--text-sec); line-height: 1.4; }
+.rcard .rb { margin-top: auto; }
+
+/* ═══ Settings ═══ */
+.sgrp { margin-bottom: 20px; }
+.sgrp h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); margin-bottom: 8px; }
+.srow {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--white); border: 1px solid var(--line);
+  border-radius: 10px; margin-bottom: 5px; font-size: 13px;
+}
+.srow .sl { font-weight: 500; color: var(--charcoal); }
+.srow .sv { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+.arr { color: var(--line); }
+
+/* ═══ Partner Grid ═══ */
+.partner-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+.pcard {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.pcard .pi { font-size: 22px; margin-bottom: 6px; }
+.pcard .pn { font-size: 12px; font-weight: 700; color: var(--charcoal); }
+.pcard .pd { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+/* ═══ Benchmark Cards ═══ */
+.bench-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.bench {
+  background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.bench h4 { font-size: 13px; font-weight: 700; color: var(--charcoal); margin-bottom: 12px; }
+
+.rank-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; font-size: 12px; }
+.rank-row .rk { width: 20px; font-weight: 700; color: var(--copper); text-align: center; }
+.rank-row .rn { flex: 1; color: var(--charcoal); font-weight: 500; }
+.rank-row .rv { font-weight: 600; color: var(--green); }
+
+.heat-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+.heat-tag {
+  padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600;
+}
+
+.quarter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.qcard { padding: 12px; border-radius: 10px; text-align: center; background: var(--bone); }
+.qcard .ql { font-size: 9px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+.qcard .qv { font-size: 16px; font-weight: 800; margin-top: 2px; }
+
+/* ═══ Page Header ═══ */
+.ph { margin-bottom: 20px; }
+.ph h2 { font-size: 20px; font-weight: 700; color: var(--charcoal); letter-spacing: -0.2px; }
+.ph p { font-size: 13px; color: var(--text-sec); margin-top: 2px; }
+
+/* ═══ Hero Strip ═══ */
+.hero-strip {
+  background: var(--green-deep); border-radius: 14px; padding: 18px 28px;
+  margin-bottom: 20px; display: flex; align-items: center;
+}
+.hero-strip-text {
+  font-size: 14px; font-weight: 600; color: var(--copper-light); letter-spacing: 0.2px;
+}
+</style>
+</head>
+<body>
+<!-- ═══ Password Gate ═══ -->
+<div id="amale-gate" style="position:fixed;inset:0;z-index:9999;background:#F5F1EB;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif">
+  <div style="text-align:center;max-width:360px;width:100%;padding:20px">
+    <div style="width:48px;height:48px;background:#B87333;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:24px;color:white;margin-bottom:18px">A</div>
+    <div style="font-size:22px;font-weight:700;color:#1F2A24;letter-spacing:-0.3px">Amalé Resale Intelligence</div>
+    <div style="font-size:13px;color:#B87333;font-weight:600;margin-top:4px">Private concept review</div>
+    <div style="font-size:13px;color:#5C6B62;margin-top:8px;margin-bottom:24px">Enter password to continue</div>
+    <input id="amale-pw" type="password" placeholder="Password" autocomplete="off" style="width:100%;padding:12px 16px;border:1px solid #D6CEC4;border-radius:10px;font-size:14px;font-family:inherit;background:white;outline:none;text-align:center;transition:border-color 0.15s" onfocus="this.style.borderColor='#B87333'" onblur="this.style.borderColor='#D6CEC4'">
+    <div id="amale-err" style="font-size:12px;color:#A65240;margin-top:8px;min-height:18px"></div>
+    <button id="amale-btn" style="margin-top:8px;width:100%;padding:12px;border:none;border-radius:10px;background:#2F4A3C;color:white;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:background 0.15s" onmouseover="this.style.background='#1C3328'" onmouseout="this.style.background='#2F4A3C'">Continue</button>
+    <div style="font-size:10px;color:#8A9590;margin-top:20px;line-height:1.5">For concept review only. Uses demo data. Not a production app.</div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='amale_access';
+  if(sessionStorage.getItem(KEY)==='granted'){
+    document.getElementById('amale-gate').remove();return;
+  }
+  document.body.style.overflow='hidden';
+  var pw=document.getElementById('amale-pw'),err=document.getElementById('amale-err'),btn=document.getElementById('amale-btn');
+  function tryAuth(){
+    if(pw.value==='amale-demo'){
+      sessionStorage.setItem(KEY,'granted');
+      document.getElementById('amale-gate').remove();
+      document.body.style.overflow='';
+    }else{
+      err.textContent='Incorrect password. Please try again.';
+      pw.value='';pw.focus();
+      pw.style.borderColor='#A65240';
+      setTimeout(function(){pw.style.borderColor='#D6CEC4'},1500);
+    }
+  }
+  btn.addEventListener('click',tryAuth);
+  pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryAuth()});
+  pw.focus();
+})();
+</script>
+<!-- ═══ /Password Gate ═══ -->
+
+
+<!-- ═══ Sidebar ═══ -->
+<aside class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-mark">
+      <div class="m">A</div>
+      <div><div class="t">Amalé</div><div class="s">Operator</div></div>
+    </div>
+  </div>
+  <nav class="sb-nav">
+    <button class="sb-link active" data-pg="overview"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Overview</button>
+    <button class="sb-link" data-pg="scans"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Item Scans</button>
+    <button class="sb-link" data-pg="pricing"><svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>Pricing Intelligence</button>
+    <button class="sb-link" data-pg="valuations"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>Product Valuations</button>
+    <button class="sb-link" data-pg="comps"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-5"/></svg>Comparable Sales</button>
+    <button class="sb-link" data-pg="benchmarks"><svg viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>Market Benchmarks</button>
+    <button class="sb-link" data-pg="partner"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>Partner / API</button>
+    <button class="sb-link" data-pg="reports"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Reports</button>
+    <button class="sb-link" data-pg="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</button>
+  </nav>
+  <div class="sb-foot">
+    <div class="env">Workspace</div>
+    <div class="ws">Amalé × thredUP</div>
+  </div>
+</aside>
+
+<!-- ═══ Main ═══ -->
+<div class="main">
+  <div class="topbar">
+    <div class="tb-title">Amalé Intelligence Console</div>
+    <div class="tb-right">
+      <span class="tb-badge">Live Demo</span>
+      <div class="tb-avatar">OP</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+<!-- ═══════════════ 1. OVERVIEW ═══════════════ -->
+<div class="pg active" id="pg-overview">
+  <div class="hero-strip">
+    <span class="hero-strip-text">Product data in. Market intelligence out.</span>
+  </div>
+  <div class="ph"><h2>Overview</h2><p>The business intelligence layer behind consumer resale decisions.</p></div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kl">Items Scanned</div><div class="kv">12,847</div><div class="kd"><span class="up">+18%</span> vs last month</div></div>
+    <div class="kpi"><div class="kl">Total Value Discovered</div><div class="kv green">$1.24M</div><div class="kd"><span class="up">+22%</span> vs last month</div></div>
+    <div class="kpi"><div class="kl">Platform Comparisons</div><div class="kv">9,312</div><div class="kd"><span class="up">+15%</span> vs last month</div></div>
+    <div class="kpi"><div class="kl">Selected Resale Pathways</div><div class="kv copper">6,418</div><div class="kd">50% conversion rate</div></div>
+    <div class="kpi"><div class="kl">Avg Payout Gap</div><div class="kv">$24</div><div class="kd">Between highest & lowest platform</div></div>
+    <div class="kpi"><div class="kl">Pricing Confidence</div><div class="kv green">87%</div><div class="kd"><span class="up">+3%</span> vs last month</div></div>
+    <div class="kpi"><div class="kl">Circular Participation</div><div class="kv copper">64%</div><div class="kd">Users who completed a resale action</div></div>
+    <div class="kpi"><div class="kl">Items Needing Review</div><div class="kv">142</div><div class="kd">Low confidence or missing data</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="scard">
+      <div class="sh"><h3>Top Scanned Categories</h3><span class="lnk">View all</span></div>
+      <div class="bar-row"><span class="bar-label">Outerwear</span><div class="bar-track"><div class="bar-fill green" style="width:82%">82%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Denim</span><div class="bar-track"><div class="bar-fill green" style="width:68%">68%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Knitwear</span><div class="bar-track"><div class="bar-fill green" style="width:55%">55%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Activewear</span><div class="bar-track"><div class="bar-fill green" style="width:47%">47%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Handbags</span><div class="bar-track"><div class="bar-fill copper" style="width:41%">41%</div></div></div>
+    </div>
+    <div class="scard">
+      <div class="sh"><h3>Top Selected Platforms</h3><span class="lnk">View all</span></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:120px;text-align:center;padding:14px;background:var(--copper-bg);border:1px solid var(--copper-border);border-radius:12px">
+          <div style="font-size:22px;font-weight:800;color:var(--copper)">38%</div>
+          <div style="font-size:11px;font-weight:600;color:var(--charcoal);margin-top:2px">thredUP</div>
+          <div style="font-size:9px;color:var(--text-muted)">2,439 selections</div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center;padding:14px;background:var(--bone);border:1px solid var(--line);border-radius:12px">
+          <div style="font-size:22px;font-weight:800;color:var(--charcoal)">28%</div>
+          <div style="font-size:11px;font-weight:600;color:var(--charcoal);margin-top:2px">Poshmark</div>
+          <div style="font-size:9px;color:var(--text-muted)">1,797 selections</div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center;padding:14px;background:var(--bone);border:1px solid var(--line);border-radius:12px">
+          <div style="font-size:22px;font-weight:800;color:var(--charcoal)">22%</div>
+          <div style="font-size:11px;font-weight:600;color:var(--charcoal);margin-top:2px">The RealReal</div>
+          <div style="font-size:9px;color:var(--text-muted)">1,412 selections</div>
+        </div>
+        <div style="flex:1;min-width:120px;text-align:center;padding:14px;background:var(--bone);border:1px solid var(--line);border-radius:12px">
+          <div style="font-size:22px;font-weight:800;color:var(--charcoal)">12%</div>
+          <div style="font-size:11px;font-weight:600;color:var(--charcoal);margin-top:2px">eBay</div>
+          <div style="font-size:9px;color:var(--text-muted)">770 selections</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="scard">
+      <div class="sh"><h3>Recent High-Value Scans</h3></div>
+      <table class="tbl">
+        <thead><tr><th>Item</th><th>Value</th><th>Confidence</th></tr></thead>
+        <tbody>
+          <tr><td><div class="item-cell"><div class="pthumb arc">ARC</div><div><div class="item-name">Beta AR Jacket</div><div class="item-meta">Arc'teryx</div></div></div></td><td><strong>$235</strong></td><td><span class="bdg bdg-green">94%</span></td></tr>
+          <tr><td><div class="item-cell"><div class="pthumb coach">CO</div><div><div class="item-name">Tabby Shoulder Bag</div><div class="item-meta">Coach</div></div></div></td><td><strong>$145</strong></td><td><span class="bdg bdg-green">91%</span></td></tr>
+          <tr><td><div class="item-cell"><div class="pthumb pat">PAT</div><div><div class="item-name">Nano Puff Jacket</div><div class="item-meta">Patagonia</div></div></div></td><td><strong>$118</strong></td><td><span class="bdg bdg-green">89%</span></td></tr>
+          <tr><td><div class="item-cell"><div class="pthumb ref">REF</div><div><div class="item-name">Reformation Midi Dress</div><div class="item-meta">Reformation</div></div></div></td><td><strong>$104</strong></td><td><span class="bdg bdg-copper">82%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="scard">
+      <div class="sh"><h3>Recommendation Performance</h3></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="text-align:center;padding:16px;background:var(--success-bg);border-radius:12px">
+          <div style="font-size:28px;font-weight:800;color:var(--success)">87%</div>
+          <div style="font-size:10px;color:var(--success);font-weight:600;margin-top:2px">Recommendation Accepted</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:var(--copper-bg);border-radius:12px">
+          <div style="font-size:28px;font-weight:800;color:var(--copper)">$24</div>
+          <div style="font-size:10px;color:var(--copper);font-weight:600;margin-top:2px">Avg Savings vs Alt</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:var(--green-bg);border-radius:12px">
+          <div style="font-size:28px;font-weight:800;color:var(--green)">16d</div>
+          <div style="font-size:10px;color:var(--green);font-weight:600;margin-top:2px">Avg Days to Sell</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:var(--info-bg);border-radius:12px">
+          <div style="font-size:28px;font-weight:800;color:var(--info)">4.2</div>
+          <div style="font-size:10px;color:var(--info);font-weight:600;margin-top:2px">Platforms Compared / Item</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 2. ITEM SCANS ═══════════════ -->
+<div class="pg" id="pg-scans">
+  <div class="ph"><h2>Item Scans</h2><p>Recent consumer scan activity across the system</p></div>
+
+  <div style="display:flex;gap:8px;margin-bottom:16px">
+    <span class="chip active">All Scans</span><span class="chip">High Value</span><span class="chip">Needs Review</span><span class="chip">Completed</span>
+  </div>
+
+  <div class="scard" style="padding:0;overflow:hidden">
+    <table class="tbl" style="margin:0">
+      <thead>
+        <tr><th>Item</th><th>Category</th><th>Value</th><th>Condition</th><th>Recommended</th><th>User Goal</th><th>Confidence</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="item-cell"><div class="pthumb polo">PRL</div><div><div class="item-name">Cable Knit Cotton Sweater</div><div class="item-meta">Polo Ralph Lauren</div></div></div></td>
+          <td>Knitwear</td><td><strong>$43</strong></td><td><span class="bdg bdg-green">Good</span></td>
+          <td>thredUP</td><td><span class="bdg bdg-copper">Least Effort</span></td><td><span class="bdg bdg-green">87%</span></td><td><span class="bdg bdg-green">Completed</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-cell"><div class="pthumb pat">PAT</div><div><div class="item-name">Nano Puff Jacket</div><div class="item-meta">Patagonia</div></div></div></td>
+          <td>Outerwear</td><td><strong>$118</strong></td><td><span class="bdg bdg-green">V. Good</span></td>
+          <td>Poshmark</td><td><span class="bdg bdg-copper">Max Cash</span></td><td><span class="bdg bdg-green">89%</span></td><td><span class="bdg bdg-green">Completed</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-cell"><div class="pthumb levis">501</div><div><div class="item-name">501 Original Jeans</div><div class="item-meta">Levi's</div></div></div></td>
+          <td>Denim</td><td><strong>$42</strong></td><td><span class="bdg bdg-green">Good</span></td>
+          <td>thredUP</td><td><span class="bdg bdg-copper">Sell Fast</span></td><td><span class="bdg bdg-green">85%</span></td><td><span class="bdg bdg-info">In Progress</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-cell"><div class="pthumb lulu">LLL</div><div><div class="item-name">Align Leggings 25"</div><div class="item-meta">Lululemon</div></div></div></td>
+          <td>Activewear</td><td><strong>$48</strong></td><td><span class="bdg bdg-green">Good</span></td>
+          <td>Poshmark</td><td><span class="bdg bdg-copper">Max Cash</span></td><td><span class="bdg bdg-green">91%</span></td><td><span class="bdg bdg-green">Completed</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-cell"><div class="pthumb coach">CO</div><div><div class="item-name">Tabby Shoulder Bag</div><div class="item-meta">Coach</div></div></div></td>
+          <td>Handbags</td><td><strong>$145</strong></td><td><span class="bdg bdg-warn">Review</span></td>
+          <td>The RealReal</td><td><span class="bdg bdg-copper">Max Cash</span></td><td><span class="bdg bdg-warn">72%</span></td><td><span class="bdg bdg-warn">Needs Review</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-cell"><div class="pthumb ref">REF</div><div><div class="item-name">Reformation Midi Dress</div><div class="item-meta">Reformation</div></div></div></td>
+          <td>Dresses</td><td><strong>$104</strong></td><td><span class="bdg bdg-green">Good</span></td>
+          <td>The RealReal</td><td><span class="bdg bdg-copper">Sustainable</span></td><td><span class="bdg bdg-copper">82%</span></td><td><span class="bdg bdg-green">Completed</span></td>
+        </tr>
+        <tr>
+          <td><div class="item-cell"><div class="pthumb arc">ARC</div><div><div class="item-name">Beta AR Jacket</div><div class="item-meta">Arc'teryx</div></div></div></td>
+          <td>Outerwear</td><td><strong>$235</strong></td><td><span class="bdg bdg-green">V. Good</span></td>
+          <td>Poshmark</td><td><span class="bdg bdg-copper">Max Cash</span></td><td><span class="bdg bdg-green">94%</span></td><td><span class="bdg bdg-info">In Progress</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 3. PRICING INTELLIGENCE ═══════════════ -->
+<div class="pg" id="pg-pricing">
+  <div class="ph"><h2>Pricing Intelligence</h2><p>See how product data becomes resale value intelligence.</p></div>
+
+  <div class="scard" style="margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div class="pthumb polo" style="width:44px;height:44px;border-radius:10px;font-size:10px">PRL</div>
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--copper);font-weight:700">Polo Ralph Lauren</div>
+        <div style="font-size:17px;font-weight:700;color:var(--charcoal)">Cable Knit Cotton Sweater</div>
+        <div style="font-size:11px;color:var(--text-muted)">Women's · Size M · Cream · 100% Cotton</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pi-split">
+    <div class="scard">
+      <div class="sh"><h3>Engine Inputs</h3></div>
+      <div class="pi-row"><span class="l">Brand</span><span class="v">Polo Ralph Lauren</span></div>
+      <div class="pi-row"><span class="l">Category</span><span class="v">Knitwear</span></div>
+      <div class="pi-row"><span class="l">Material</span><span class="v">100% Cotton</span></div>
+      <div class="pi-row"><span class="l">Condition</span><span class="v">4/5 Good</span></div>
+      <div class="pi-row"><span class="l">Original MSRP</span><span class="v">$128</span></div>
+      <div class="pi-row"><span class="l">Age</span><span class="v">1–3 years</span></div>
+      <div class="pi-row"><span class="l">Season</span><span class="v">Fall / Winter</span></div>
+      <div class="pi-row"><span class="l">Demand Signal</span><span class="v"><span class="bdg bdg-green">Rising</span></span></div>
+      <div class="pi-row"><span class="l">Comparable Sales</span><span class="v">47 matches</span></div>
+      <div class="pi-row"><span class="l">Platform Rules</span><span class="v">4 platforms checked</span></div>
+    </div>
+    <div class="scard">
+      <div class="sh"><h3>Engine Outputs</h3></div>
+      <div style="margin-bottom:16px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Average Resale Value</div>
+        <div style="font-size:36px;font-weight:800;color:var(--green);letter-spacing:-1px">$43</div>
+        <div style="font-size:11px;color:var(--text-muted)">Range: $28 – $65</div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600;margin-bottom:4px">Pricing Confidence</div>
+        <div class="gauge">
+          <div class="gauge-track"><div class="gauge-fill" style="width:87%;background:var(--green)"></div></div>
+          <div class="gauge-val" style="color:var(--green)">87%</div>
+        </div>
+      </div>
+      <div class="pi-row"><span class="l">Recommended Platform</span><span class="v"><span class="bdg bdg-copper">thredUP</span></span></div>
+      <div class="pi-row"><span class="l">Expected Days to Sell</span><span class="v">14–22 days</span></div>
+      <div class="pi-row"><span class="l">Payout Gap</span><span class="v">$37 across platforms</span></div>
+      <div class="pi-row"><span class="l">Effort Level</span><span class="v"><span class="bdg bdg-green">Low</span></span></div>
+      <div class="pi-row"><span class="l">Next Best Action</span><span class="v">List on thredUP for Fall demand</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 4. PRODUCT VALUATIONS ═══════════════ -->
+<div class="pg" id="pg-valuations">
+  <div class="ph"><h2>Product Valuations</h2><p>Product-level resale value intelligence across scanned inventory.</p></div>
+
+  <div class="scard" style="padding:0;overflow-x:auto">
+    <table class="tbl" style="min-width:1000px">
+      <thead>
+        <tr><th>Product</th><th>Category</th><th>MSRP</th><th>Avg Value</th><th>Platform Range</th><th>Condition</th><th>Demand</th><th>Confidence</th><th>Days to Sell</th><th>Retention</th><th>Rec. Platform</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><div class="item-cell"><div class="pthumb polo">PRL</div><div><div class="item-name">Cable Knit Sweater</div><div class="item-meta">Polo RL</div></div></div></td><td>Knitwear</td><td>$128</td><td><strong>$43</strong></td><td>$28–$65</td><td><span class="bdg bdg-green">Good</span></td><td><span class="bdg bdg-green">Rising</span></td><td>87%</td><td>14–22</td><td>34%</td><td>thredUP</td><td><span class="bdg bdg-green">Active</span></td></tr>
+        <tr><td><div class="item-cell"><div class="pthumb pat">PAT</div><div><div class="item-name">Nano Puff Jacket</div><div class="item-meta">Patagonia</div></div></div></td><td>Outerwear</td><td>$199</td><td><strong>$118</strong></td><td>$85–$155</td><td><span class="bdg bdg-green">V. Good</span></td><td><span class="bdg bdg-green">High</span></td><td>89%</td><td>10–18</td><td>59%</td><td>Poshmark</td><td><span class="bdg bdg-green">Active</span></td></tr>
+        <tr><td><div class="item-cell"><div class="pthumb levis">501</div><div><div class="item-name">501 Original Jeans</div><div class="item-meta">Levi's</div></div></div></td><td>Denim</td><td>$80</td><td><strong>$42</strong></td><td>$25–$55</td><td><span class="bdg bdg-green">Good</span></td><td><span class="bdg bdg-info">Steady</span></td><td>85%</td><td>12–20</td><td>53%</td><td>thredUP</td><td><span class="bdg bdg-green">Active</span></td></tr>
+        <tr><td><div class="item-cell"><div class="pthumb lulu">LLL</div><div><div class="item-name">Align Leggings 25"</div><div class="item-meta">Lululemon</div></div></div></td><td>Activewear</td><td>$98</td><td><strong>$48</strong></td><td>$30–$65</td><td><span class="bdg bdg-green">Good</span></td><td><span class="bdg bdg-green">High</span></td><td>91%</td><td>7–14</td><td>49%</td><td>Poshmark</td><td><span class="bdg bdg-green">Active</span></td></tr>
+        <tr><td><div class="item-cell"><div class="pthumb coach">CO</div><div><div class="item-name">Tabby Shoulder Bag</div><div class="item-meta">Coach</div></div></div></td><td>Handbags</td><td>$350</td><td><strong>$145</strong></td><td>$95–$190</td><td><span class="bdg bdg-warn">Review</span></td><td><span class="bdg bdg-green">Rising</span></td><td>72%</td><td>18–30</td><td>41%</td><td>The RealReal</td><td><span class="bdg bdg-warn">Review</span></td></tr>
+        <tr><td><div class="item-cell"><div class="pthumb ref">REF</div><div><div class="item-name">Midi Dress</div><div class="item-meta">Reformation</div></div></div></td><td>Dresses</td><td>$248</td><td><strong>$104</strong></td><td>$70–$140</td><td><span class="bdg bdg-green">Good</span></td><td><span class="bdg bdg-info">Steady</span></td><td>82%</td><td>14–24</td><td>42%</td><td>The RealReal</td><td><span class="bdg bdg-green">Active</span></td></tr>
+        <tr><td><div class="item-cell"><div class="pthumb arc">ARC</div><div><div class="item-name">Beta AR Jacket</div><div class="item-meta">Arc'teryx</div></div></div></td><td>Outerwear</td><td>$600</td><td><strong>$235</strong></td><td>$180–$320</td><td><span class="bdg bdg-green">V. Good</span></td><td><span class="bdg bdg-green">High</span></td><td>94%</td><td>8–16</td><td>39%</td><td>Poshmark</td><td><span class="bdg bdg-green">Active</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 5. COMPARABLE SALES ═══════════════ -->
+<div class="pg" id="pg-comps">
+  <div class="ph"><h2>Comparable Sales Intelligence</h2><p>Comparable resale signals used to support pricing confidence.</p></div>
+
+  <div class="scard" style="margin-bottom:16px">
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Showing comparables for</div>
+    <div style="font-size:16px;font-weight:700;color:var(--charcoal)">Polo Ralph Lauren Cable Knit Cotton Sweater · Good · Size M</div>
+  </div>
+
+  <div class="scard" style="padding:0;overflow-x:auto">
+    <table class="tbl">
+      <thead><tr><th>Similar Product</th><th>Platform</th><th>Sold Price</th><th>Condition</th><th>Days to Sell</th><th>Date Sold</th><th>Match</th></tr></thead>
+      <tbody>
+        <tr><td>PRL Cable Knit Crew · Cream · M</td><td>thredUP</td><td><strong>$32</strong></td><td><span class="bdg bdg-green">Good</span></td><td>18</td><td>Jun 24</td><td><span class="bdg bdg-green">96%</span></td></tr>
+        <tr><td>PRL Cotton Knit Sweater · Ivory · S</td><td>Poshmark</td><td><strong>$48</strong></td><td><span class="bdg bdg-green">V. Good</span></td><td>12</td><td>Jun 18</td><td><span class="bdg bdg-green">93%</span></td></tr>
+        <tr><td>PRL Cable Sweater · Navy · L</td><td>eBay</td><td><strong>$42</strong></td><td><span class="bdg bdg-green">Good</span></td><td>8</td><td>Jun 15</td><td><span class="bdg bdg-green">90%</span></td></tr>
+        <tr><td>PRL Cotton Crewneck · Cream · M</td><td>The RealReal</td><td><strong>$55</strong></td><td><span class="bdg bdg-green">V. Good</span></td><td>22</td><td>Jun 10</td><td><span class="bdg bdg-copper">87%</span></td></tr>
+        <tr><td>PRL Knit Pullover · Beige · M</td><td>thredUP</td><td><strong>$29</strong></td><td><span class="bdg bdg-info">Fair</span></td><td>24</td><td>Jun 5</td><td><span class="bdg bdg-copper">84%</span></td></tr>
+        <tr><td>PRL Cable Cotton · White · L</td><td>Poshmark</td><td><strong>$52</strong></td><td><span class="bdg bdg-green">Good</span></td><td>15</td><td>May 28</td><td><span class="bdg bdg-copper">81%</span></td></tr>
+        <tr><td>PRL Crew Knit · Oatmeal · S</td><td>eBay</td><td><strong>$38</strong></td><td><span class="bdg bdg-green">Good</span></td><td>10</td><td>May 22</td><td><span class="bdg bdg-info">78%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 6. MARKET BENCHMARKS ═══════════════ -->
+<div class="pg" id="pg-benchmarks">
+  <div class="ph"><h2>Market Benchmarks</h2><p>Resale value signals across brands, categories, seasons, and platforms.</p></div>
+
+  <div class="bench-grid">
+    <div class="bench">
+      <h4>Brand Value Retention</h4>
+      <div class="rank-row"><span class="rk">1</span><span class="rn">Arc'teryx</span><span class="rv">62%</span></div>
+      <div class="rank-row"><span class="rk">2</span><span class="rn">Patagonia</span><span class="rv">59%</span></div>
+      <div class="rank-row"><span class="rk">3</span><span class="rn">Levi's</span><span class="rv">53%</span></div>
+      <div class="rank-row"><span class="rk">4</span><span class="rn">Lululemon</span><span class="rv">49%</span></div>
+      <div class="rank-row"><span class="rk">5</span><span class="rn">Reformation</span><span class="rv">42%</span></div>
+      <div class="rank-row"><span class="rk">6</span><span class="rn">Coach</span><span class="rv">41%</span></div>
+      <div class="rank-row"><span class="rk">7</span><span class="rn">Polo Ralph Lauren</span><span class="rv">34%</span></div>
+    </div>
+    <div class="bench">
+      <h4>Category Demand</h4>
+      <div class="heat-grid">
+        <span class="heat-tag" style="background:var(--success-bg);color:var(--success)">Outerwear — High</span>
+        <span class="heat-tag" style="background:var(--success-bg);color:var(--success)">Activewear — High</span>
+        <span class="heat-tag" style="background:var(--copper-bg);color:var(--copper)">Denim — Rising</span>
+        <span class="heat-tag" style="background:var(--copper-bg);color:var(--copper)">Handbags — Rising</span>
+        <span class="heat-tag" style="background:var(--info-bg);color:var(--info)">Knitwear — Steady</span>
+        <span class="heat-tag" style="background:var(--info-bg);color:var(--info)">Dresses — Steady</span>
+        <span class="heat-tag" style="background:var(--warning-bg);color:var(--warning)">Suits — Declining</span>
+        <span class="heat-tag" style="background:var(--warning-bg);color:var(--warning)">Formalwear — Declining</span>
+      </div>
+    </div>
+    <div class="bench">
+      <h4>Seasonal Demand</h4>
+      <div class="quarter-grid">
+        <div class="qcard"><div class="ql">Q1</div><div class="qv" style="color:var(--info)">Med</div><div style="font-size:9px;color:var(--text-muted)">Post-holiday lull</div></div>
+        <div class="qcard"><div class="ql">Q2</div><div class="qv" style="color:var(--success)">High</div><div style="font-size:9px;color:var(--text-muted)">Spring cleaning</div></div>
+        <div class="qcard"><div class="ql">Q3</div><div class="qv" style="color:var(--copper)">Peak</div><div style="font-size:9px;color:var(--text-muted)">Back-to-school</div></div>
+        <div class="qcard"><div class="ql">Q4</div><div class="qv" style="color:var(--success)">High</div><div style="font-size:9px;color:var(--text-muted)">Fall/Winter demand</div></div>
+      </div>
+    </div>
+    <div class="bench">
+      <h4>Platform Performance</h4>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--copper-bg);border-radius:8px"><span style="font-size:12px;font-weight:600;color:var(--charcoal)">thredUP</span><span style="font-size:11px;color:var(--copper);font-weight:600">Fastest sell-through</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bone);border-radius:8px"><span style="font-size:12px;font-weight:600;color:var(--charcoal)">Poshmark</span><span style="font-size:11px;color:var(--green);font-weight:600">Highest avg payout</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bone);border-radius:8px"><span style="font-size:12px;font-weight:600;color:var(--charcoal)">The RealReal</span><span style="font-size:11px;color:var(--green);font-weight:600">Best for luxury</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bone);border-radius:8px"><span style="font-size:12px;font-weight:600;color:var(--charcoal)">eBay</span><span style="font-size:11px;color:var(--info);font-weight:600">Widest audience</span></div>
+      </div>
+    </div>
+    <div class="bench">
+      <h4>Depreciation Curve — Outerwear</h4>
+      <div style="display:flex;align-items:end;gap:6px;height:100px;padding-top:10px">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="background:var(--green);border-radius:4px 4px 0 0;width:100%;height:90px"></div><span style="font-size:8px;color:var(--text-muted)">0–6mo</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="background:var(--green);border-radius:4px 4px 0 0;width:100%;height:72px"></div><span style="font-size:8px;color:var(--text-muted)">6–12mo</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="background:var(--copper);border-radius:4px 4px 0 0;width:100%;height:54px"></div><span style="font-size:8px;color:var(--text-muted)">1–2yr</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="background:var(--copper);border-radius:4px 4px 0 0;width:100%;height:40px"></div><span style="font-size:8px;color:var(--text-muted)">2–3yr</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="background:var(--sand);border-radius:4px 4px 0 0;width:100%;height:28px"></div><span style="font-size:8px;color:var(--text-muted)">3–5yr</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="background:var(--sand);border-radius:4px 4px 0 0;width:100%;height:18px"></div><span style="font-size:8px;color:var(--text-muted)">5yr+</span></div>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:8px;text-align:center">Value retention over time (% of MSRP)</div>
+    </div>
+    <div class="bench">
+      <h4>Confidence by Category</h4>
+      <div class="bar-row"><span class="bar-label">Outerwear</span><div class="bar-track"><div class="bar-fill green" style="width:94%">94%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Activewear</span><div class="bar-track"><div class="bar-fill green" style="width:91%">91%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Denim</span><div class="bar-track"><div class="bar-fill green" style="width:85%">85%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Knitwear</span><div class="bar-track"><div class="bar-fill green" style="width:82%">82%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Dresses</span><div class="bar-track"><div class="bar-fill copper" style="width:78%">78%</div></div></div>
+      <div class="bar-row"><span class="bar-label">Handbags</span><div class="bar-track"><div class="bar-fill copper" style="width:72%">72%</div></div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 7. PARTNER / API ═══════════════ -->
+<div class="pg" id="pg-partner">
+  <div class="ph"><h2>Partner / API</h2><p>Power resale decisions across partner platforms and circular commerce workflows.</p></div>
+
+  <div class="scard">
+    <div class="sh"><h3>Pricing Intelligence API</h3><span class="bdg bdg-green">Live</span></div>
+    <div style="font-size:13px;color:var(--text-sec);margin-bottom:16px">Product data in. Recommendation out.</div>
+
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px">Endpoint</div>
+    <div class="codeblock"><span class="k">GET</span> /api/v1/price</div>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px">Request</div>
+        <div class="codeblock"><span class="c">// Product data in</span>
+{
+  <span class="s">"brand"</span>: <span class="s">"Polo Ralph Lauren"</span>,
+  <span class="s">"category"</span>: <span class="s">"Knitwear"</span>,
+  <span class="s">"condition"</span>: <span class="s">"Good"</span>,
+  <span class="s">"material"</span>: <span class="s">"100% Cotton"</span>,
+  <span class="s">"msrp"</span>: <span class="k">128</span>,
+  <span class="s">"age"</span>: <span class="s">"1-3 years"</span>,
+  <span class="s">"season"</span>: <span class="s">"Fall/Winter"</span>,
+  <span class="s">"demand"</span>: <span class="s">"rising"</span>,
+  <span class="s">"location"</span>: <span class="s">"US"</span>
+}</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:6px">Response</div>
+        <div class="codeblock"><span class="c">// Recommendation out</span>
+{
+  <span class="s">"recommended_price"</span>: <span class="k">43</span>,
+  <span class="s">"price_range"</span>: [<span class="k">28</span>, <span class="k">65</span>],
+  <span class="s">"confidence_score"</span>: <span class="k">0.87</span>,
+  <span class="s">"recommended_platform"</span>: <span class="s">"thredUP"</span>,
+  <span class="s">"days_to_sell"</span>: [<span class="k">14</span>, <span class="k">22</span>],
+  <span class="s">"payout_comparison"</span>: {
+    <span class="s">"thredUP"</span>: [<span class="k">28</span>, <span class="k">35</span>],
+    <span class="s">"Poshmark"</span>: [<span class="k">45</span>, <span class="k">55</span>],
+    <span class="s">"The RealReal"</span>: [<span class="k">50</span>, <span class="k">65</span>],
+    <span class="s">"eBay"</span>: [<span class="k">40</span>, <span class="k">50</span>]
+  },
+  <span class="s">"next_best_action"</span>: <span class="s">"List now for Fall demand"</span>
+}</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:14px;font-weight:700;color:var(--charcoal);margin:20px 0 12px">Partner Types</div>
+  <div class="partner-grid">
+    <div class="pcard"><div class="pi">🏪</div><div class="pn">thredUP</div><div class="pd">Consignment partner</div></div>
+    <div class="pcard"><div class="pi">👥</div><div class="pn">Poshmark</div><div class="pd">Peer-to-peer marketplace</div></div>
+    <div class="pcard"><div class="pi">💎</div><div class="pn">The RealReal</div><div class="pd">Luxury consignment</div></div>
+    <div class="pcard"><div class="pi">🌐</div><div class="pn">eBay</div><div class="pd">Global marketplace</div></div>
+    <div class="pcard"><div class="pi">🏷</div><div class="pn">Brands</div><div class="pd">Direct brand integrations</div></div>
+    <div class="pcard"><div class="pi">♻</div><div class="pn">Recommerce Operators</div><div class="pd">Resale workflow integration</div></div>
+    <div class="pcard"><div class="pi">🔄</div><div class="pn">Trade-In Programs</div><div class="pd">Brand take-back programs</div></div>
+    <div class="pcard"><div class="pi">🤝</div><div class="pn">Circular Partners</div><div class="pd">Circular commerce ecosystem</div></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 8. REPORTS ═══════════════ -->
+<div class="pg" id="pg-reports">
+  <div class="ph"><h2>Reports</h2><p>Generate intelligence reports for partners and internal teams</p></div>
+
+  <div class="grid-3">
+    <div class="rcard"><div class="ri">📊</div><div class="rn">Pricing Intelligence Report</div><div class="rd">Detailed pricing analysis with confidence scores, comparable sales, and platform payout breakdown.</div><div class="rb"><button class="btn btn-primary btn-sm">Preview Report</button></div></div>
+    <div class="rcard"><div class="ri">⚖</div><div class="rn">Platform Comparison Report</div><div class="rd">Side-by-side platform analysis including fees, payout speed, effort, and sell-through rates.</div><div class="rb"><button class="btn btn-primary btn-sm">Preview Report</button></div></div>
+    <div class="rcard"><div class="ri">📈</div><div class="rn">Resale Value Benchmark</div><div class="rd">Market-level resale value benchmarks by brand, category, and condition grade.</div><div class="rb"><button class="btn btn-primary btn-sm">Preview Report</button></div></div>
+    <div class="rcard"><div class="ri">🔥</div><div class="rn">Category Demand Report</div><div class="rd">Category-level demand signals, seasonal trends, and volume forecasts.</div><div class="rb"><button class="btn btn-primary btn-sm">Preview Report</button></div></div>
+    <div class="rcard"><div class="ri">📉</div><div class="rn">Brand Depreciation Report</div><div class="rd">Brand-level value retention curves and depreciation rates over time.</div><div class="rb"><button class="btn btn-primary btn-sm">Preview Report</button></div></div>
+    <div class="rcard"><div class="ri">⏱</div><div class="rn">Sell-Through Forecast</div><div class="rd">Predicted sell-through rates by platform, category, price point, and season.</div><div class="rb"><button class="btn btn-primary btn-sm">Preview Report</button></div></div>
+    <div class="rcard"><div class="ri">🔗</div><div class="rn">API Usage Report</div><div class="rd">Partner API usage metrics, request volume, response times, and error rates.</div><div class="rb"><button class="btn btn-primary btn-sm">Preview Report</button></div></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ 9. SETTINGS ═══════════════ -->
+<div class="pg" id="pg-settings">
+  <div class="ph"><h2>Settings</h2><p>Configure workspace, partner, and pricing preferences</p></div>
+
+  <div class="sgrp"><h4>Workspace</h4>
+    <div class="srow"><span class="sl">Workspace Name</span><span class="sv">Amalé × thredUP <span class="arr">›</span></span></div>
+    <div class="srow"><span class="sl">Environment</span><span class="sv"><span class="bdg bdg-green">Production</span></span></div>
+    <div class="srow"><span class="sl">Team Members</span><span class="sv">4 members <span class="arr">›</span></span></div>
+  </div>
+  <div class="sgrp"><h4>Partner Settings</h4>
+    <div class="srow"><span class="sl">thredUP Integration</span><span class="sv"><span class="bdg bdg-green">Connected</span></span></div>
+    <div class="srow"><span class="sl">Poshmark Integration</span><span class="sv"><span class="bdg bdg-muted">Pending</span></span></div>
+    <div class="srow"><span class="sl">The RealReal Integration</span><span class="sv"><span class="bdg bdg-muted">Pending</span></span></div>
+    <div class="srow"><span class="sl">eBay Integration</span><span class="sv"><span class="bdg bdg-muted">Pending</span></span></div>
+  </div>
+  <div class="sgrp"><h4>Pricing Rules</h4>
+    <div class="srow"><span class="sl">Minimum Confidence Threshold</span><span class="sv">75% <span class="arr">›</span></span></div>
+    <div class="srow"><span class="sl">Comparable Sales Minimum</span><span class="sv">5 matches <span class="arr">›</span></span></div>
+    <div class="srow"><span class="sl">Price Freshness Window</span><span class="sv">90 days <span class="arr">›</span></span></div>
+  </div>
+  <div class="sgrp"><h4>Condition Grading</h4>
+    <div class="srow"><span class="sl">Grading Scale</span><span class="sv">5-point (1–5) <span class="arr">›</span></span></div>
+    <div class="srow"><span class="sl">Auto-Grade from Image</span><span class="sv"><div class="toggle on"></div></span></div>
+    <div class="srow"><span class="sl">Require Manual Review</span><span class="sv"><div class="toggle"></div></span></div>
+  </div>
+  <div class="sgrp"><h4>API Settings</h4>
+    <div class="srow"><span class="sl">API Key</span><span class="sv">amle_live_••••••7f3a <span class="arr">›</span></span></div>
+    <div class="srow"><span class="sl">Rate Limit</span><span class="sv">10,000 req/day <span class="arr">›</span></span></div>
+    <div class="srow"><span class="sl">Webhook URL</span><span class="sv">https://... <span class="arr">›</span></span></div>
+  </div>
+  <div class="sgrp"><h4>Report Preferences</h4>
+    <div class="srow"><span class="sl">Default Report Format</span><span class="sv">PDF <span class="arr">›</span></span></div>
+    <div class="srow"><span class="sl">Auto-Preview Report Weekly</span><span class="sv"><div class="toggle on"></div></span></div>
+    <div class="srow"><span class="sl">Email Reports To</span><span class="sv">team@amale.com <span class="arr">›</span></span></div>
+  </div>
+
+  <div style="text-align:center;margin-top:24px;padding:16px">
+    <div style="font-size:10px;color:var(--text-muted);line-height:1.6"><strong style="color:var(--text-sec)">Amalé Product Intelligence</strong><br>Product data in. Resale value intelligence out.</div>
+  </div>
+</div>
+
+  </div><!-- content -->
+</div><!-- main -->
+
+<script>
+document.querySelectorAll('.sb-link').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.sb-link').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.pg').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('pg-' + btn.dataset.pg).classList.add('active');
+    document.querySelector('.tb-title').textContent = btn.textContent.trim();
+    window.scrollTo(0, 0);
+  });
+});
+</script>
+</body>
+</html>

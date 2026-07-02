@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Amalé Resale Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+/*
+ * Amalé Design System v2
+ * Premium, warm, modern — consumer-friendly + enterprise-credible
+ */
+
+:root {
+  --bone:        #F5F1EB;
+  --charcoal:    #1F2A24;
+  --green:       #2F4A3C;
+  --green-deep:  #1C3328;
+  --copper:      #B87333;
+  --copper-light:#D4955E;
+  --sand:        #E8E1D8;
+  --line:        #D6CEC4;
+  --white:       #FFFFFF;
+  --bone-dark:   #EDE8E0;
+  --text-sec:    #5C6B62;
+  --text-muted:  #8A9590;
+  --copper-bg:     rgba(184,115,51,0.07);
+  --copper-border: rgba(184,115,51,0.18);
+  --green-bg:      rgba(47,74,60,0.05);
+  --green-border:  rgba(47,74,60,0.12);
+  --green-light:   rgba(47,74,60,0.08);
+  --success:       #3D7A5A;
+  --success-bg:    rgba(61,122,90,0.07);
+  --warning:       #C4882F;
+  --warning-bg:    rgba(196,136,47,0.07);
+  --danger:        #A65240;
+  --danger-bg:     rgba(166,82,64,0.07);
+  --info:          #4A7B8C;
+  --info-bg:       rgba(74,123,140,0.07);
+  --r-xs: 4px; --r-sm: 8px; --r: 12px; --r-lg: 16px; --r-xl: 20px; --r-pill: 100px;
+  --s-xs: 0 1px 2px rgba(31,42,36,0.03);
+  --s:    0 1px 4px rgba(31,42,36,0.05);
+  --s-md: 0 4px 16px rgba(31,42,36,0.07);
+  --s-lg: 0 8px 28px rgba(31,42,36,0.09);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--charcoal);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography: DM Sans for UI, DM Serif Display only for hero prices ── */
+.t-serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+.t-price  { font-family: 'DM Serif Display', serif; font-weight: 400; letter-spacing: -0.5px; }
+
+.badge {
+  display: inline-flex; align-items: center; padding: 3px 9px;
+  border-radius: var(--r-pill); font-size: 10.5px; font-weight: 600; white-space: nowrap;
+}
+.badge-green  { background: var(--success-bg); color: var(--success); }
+.badge-copper { background: var(--copper-bg);  color: var(--copper); }
+.badge-warn   { background: var(--warning-bg); color: var(--warning); }
+.badge-danger { background: var(--danger-bg);  color: var(--danger); }
+.badge-info   { background: var(--info-bg);    color: var(--info); }
+.badge-brand  { background: var(--green-bg);   color: var(--green); }
+.badge-muted  { background: var(--sand);       color: var(--text-sec); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 11px 20px; border-radius: var(--r-sm); border: none;
+  font-size: 13.5px; font-weight: 600; font-family: inherit;
+  cursor: pointer; transition: all 0.15s; text-decoration: none; white-space: nowrap;
+}
+.btn-primary { background: var(--green); color: var(--white); }
+.btn-primary:hover { background: var(--green-deep); }
+.btn-copper  { background: var(--copper); color: var(--white); }
+.btn-copper:hover { opacity: 0.9; }
+.btn-secondary { background: var(--white); color: var(--charcoal); border: 1px solid var(--line); }
+.btn-secondary:hover { background: var(--bone); }
+.btn-ghost { background: transparent; color: var(--text-sec); border: none; }
+.btn-ghost:hover { color: var(--charcoal); }
+.btn-sm { padding: 7px 14px; font-size: 12px; }
+.btn-block { width: 100%; }
+.btn-pill { border-radius: var(--r-pill); }
+
+.card {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--s);
+}
+
+.chip {
+  padding: 6px 14px; border: 1px solid var(--line); border-radius: var(--r-pill);
+  font-size: 12px; font-weight: 500; color: var(--text-sec);
+  background: var(--white); cursor: pointer; transition: all 0.15s;
+}
+.chip:hover { border-color: var(--green); color: var(--green); }
+.chip.active { background: var(--green); border-color: var(--green); color: var(--white); font-weight: 600; }
+
+.toggle { width: 38px; height: 22px; background: var(--line); border-radius: 11px; position: relative; cursor: pointer; }
+.toggle.on { background: var(--green); }
+.toggle::after { content:''; position: absolute; top:3px; left:3px; width:16px; height:16px; background:white; border-radius:50%; transition: transform 0.15s; }
+.toggle.on::after { transform: translateX(16px); }
+</style>
+<style>
+  body { background: #e8e1d8; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding: 20px 0; }
+
+  /* ═══ Phone Frame ═══ */
+  .phone {
+    width: 390px; min-height: 780px; background: var(--bone); border-radius: 40px;
+    box-shadow: 0 0 0 8px #1F2A24, 0 20px 60px rgba(0,0,0,0.25);
+    position: relative; overflow: hidden;
+  }
+  .phone-inner { height: 100%; overflow-y: auto; overflow-x: hidden; padding-bottom: 80px; -webkit-overflow-scrolling: touch; }
+  .phone-inner::-webkit-scrollbar { display: none; }
+
+  /* ═══ Status Bar ═══ */
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 28px 0; font-size: 13px; font-weight: 600; color: var(--charcoal);
+  }
+  .sb-icons { display: flex; gap: 5px; align-items: center; }
+  .sb-icons svg { width: 15px; height: 15px; }
+
+  /* ═══ App Header ═══ */
+  .appbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 24px 12px;
+  }
+  .appbar-left { display: flex; align-items: center; gap: 9px; }
+  .ab-mark {
+    width: 30px; height: 30px; background: var(--copper); border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif; font-size: 16px; color: white;
+  }
+  .ab-text .ab-name { font-size: 18px; font-weight: 700; color: var(--charcoal); letter-spacing: -0.3px; }
+  .ab-text .ab-sub { font-size: 8px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); font-weight: 600; margin-top: -2px; }
+  .appbar-right { display: flex; gap: 8px; }
+  .ab-btn {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--white);
+    border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+    position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .ab-btn svg { width: 17px; height: 17px; stroke: var(--text-sec); fill: none; stroke-width: 1.6; }
+  .ab-dot { position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; background: var(--copper); border-radius: 50%; border: 1.5px solid var(--white); }
+  .ab-avatar {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--green);
+    color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ═══ Bottom Nav ═══ */
+  .bnav {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 100;
+    background: var(--white); border-top: 1px solid var(--line);
+    display: flex; padding: 6px 8px 18px; border-radius: 0 0 40px 40px;
+  }
+  .bnav-t {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 6px 0 0; cursor: pointer; border: none; background: none;
+    font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500;
+    color: var(--text-muted); transition: all 0.15s; letter-spacing: 0.1px;
+  }
+  .bnav-t svg { width: 21px; height: 21px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+  .bnav-t.active { color: var(--green); font-weight: 700; }
+  .bnav-t.active svg { stroke-width: 2; }
+  .bnav-t.scan-t { position: relative; top: -16px; }
+  .scan-orb {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--copper), #c98444);
+    color: white; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 18px rgba(184,115,51,0.35); border: 3px solid var(--bone);
+  }
+  .scan-orb svg { width: 23px; height: 23px; stroke-width: 2; }
+
+  /* ═══ Pages ═══ */
+  .pg { display: none; padding: 0 24px 20px; }
+  .pg.active { display: block; }
+
+  /* ═══ Trust Banner ═══ */
+  .trust {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 9px 16px; background: var(--white); border: 1px solid var(--line);
+    border-radius: 12px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .trust span { display: flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 600; color: var(--green); }
+  .trust svg { width: 12px; height: 12px; stroke: var(--green); fill: none; stroke-width: 2; }
+
+  /* ═══ Section Header ═══ */
+  .shd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .shd h3 { font-size: 15px; font-weight: 700; color: var(--charcoal); letter-spacing: -0.1px; }
+  .shd .lnk { font-size: 11px; font-weight: 600; color: var(--copper); cursor: pointer; }
+
+  /* ═══ Hero Card ═══ */
+  .hero-card {
+    background: linear-gradient(140deg, var(--green-deep), var(--green) 70%, #3a5e4d);
+    border-radius: 16px; padding: 20px 22px; color: white;
+    margin-bottom: 14px; position: relative; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,51,40,0.15);
+  }
+  .hero-card::after {
+    content: ''; position: absolute; top: -25px; right: -25px;
+    width: 100px; height: 100px; background: radial-gradient(circle, rgba(184,115,51,0.25) 0%, transparent 70%); border-radius: 50%;
+  }
+  .hc-row { display: flex; position: relative; z-index: 1; }
+  .hc-stat { flex: 1; }
+  .hc-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(255,255,255,0.45); font-weight: 600; margin-bottom: 4px; }
+  .hc-val { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; }
+  .hc-val.copper { color: var(--copper-light); }
+  .hc-sub { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .hc-div { width: 1px; background: rgba(255,255,255,0.1); margin: 0 16px; }
+
+  /* ═══ Action Cards ═══ */
+  .acard {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px; background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; margin-bottom: 8px; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03); transition: transform 0.1s, box-shadow 0.15s;
+  }
+  .acard:active { transform: scale(0.98); }
+  .ac-ic {
+    width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .ac-body { flex: 1; }
+  .ac-body h4 { font-size: 13px; font-weight: 700; color: var(--charcoal); line-height: 1.3; }
+  .ac-body p { font-size: 11.5px; color: var(--text-sec); line-height: 1.35; margin-top: 1px; }
+  .ac-arr { color: var(--line); font-size: 18px; }
+
+  /* ═══ Product Thumbnail ═══ */
+  .pthumb {
+    width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 0.3px;
+    background: var(--sand); border: 1px solid var(--line); overflow: hidden; position: relative;
+  }
+  .pthumb.brand-polo  { background: linear-gradient(135deg, #1a3a5c, #2e5a8a); }
+  .pthumb.brand-pat   { background: linear-gradient(135deg, #4a2c6e, #7b5ea7); }
+  .pthumb.brand-levis  { background: linear-gradient(135deg, #8b2c1a, #c94432); }
+  .pthumb.brand-lulu  { background: linear-gradient(135deg, #6b1a1a, #a63232); }
+  .pthumb.brand-coach { background: linear-gradient(135deg, #8b6914, #c49a2c); }
+  .pthumb.brand-ref   { background: linear-gradient(135deg, #2a5a2a, #4a8c4a); }
+  .pthumb.brand-arc   { background: linear-gradient(135deg, #1a1a2e, #3a3a5c); }
+  .pthumb.brand-nf    { background: linear-gradient(135deg, #1a1a1a, #4a4a4a); }
+  .pthumb.brand-jcrew { background: linear-gradient(135deg, #1a4a6e, #2e7ab8); }
+  .pthumb.brand-nike  { background: linear-gradient(135deg, #1a1a1a, #4a4a4a); }
+
+  /* ═══ Item Row ═══ */
+  .irow {
+    display: flex; align-items: center; gap: 12px; padding: 10px 0; cursor: pointer;
+  }
+  .irow + .irow { border-top: 1px solid rgba(214,206,196,0.5); }
+  .irow-info { flex: 1; min-width: 0; }
+  .irow-name { font-size: 13px; font-weight: 600; color: var(--charcoal); line-height: 1.3; }
+  .irow-meta { font-size: 11px; color: var(--text-muted); }
+  .irow-val { font-size: 13px; font-weight: 700; color: var(--green); }
+
+  /* ═══ Chips ═══ */
+  .chips { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 2px; }
+  .chips .chip { flex: 1; text-align: center; }
+  .chips::-webkit-scrollbar { display: none; }
+
+  /* ═══ Scan Frame ═══ */
+  .scanbox {
+    width: 100%; aspect-ratio: 4/3.2; border-radius: 20px;
+    background: radial-gradient(ellipse at center, #2a3a30, var(--charcoal));
+    position: relative; overflow: hidden; margin-bottom: 14px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  }
+  .scanbox .corners {
+    position: absolute; inset: 24px;
+    border: 2.5px solid rgba(255,255,255,0.15); border-radius: 14px;
+  }
+  .scanbox .corners::before, .scanbox .corners::after {
+    content: ''; position: absolute; background: var(--copper);
+  }
+  .scanbox .corners::before { top: -1px; left: 20px; right: 20px; height: 2.5px; border-radius: 2px; }
+  .scanbox .corners::after { bottom: -1px; left: 20px; right: 20px; height: 2.5px; border-radius: 2px; }
+  .scanbox .sline {
+    position: absolute; left: 24px; right: 24px; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--copper) 30%, var(--copper) 70%, transparent 100%);
+    animation: scanmove 2.8s ease-in-out infinite; opacity: 0.6;
+    box-shadow: 0 0 12px rgba(184,115,51,0.4);
+  }
+  @keyframes scanmove { 0%,100% { top: 30%; opacity: 0.3; } 50% { top: 65%; opacity: 0.7; } }
+  .scanbox .center {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; color: white; gap: 8px; z-index: 2;
+  }
+  .scanbox .center svg { width: 40px; height: 40px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 1.2; }
+  .scanbox .center .t1 { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85); }
+  .scanbox .center .t2 { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+  /* ═══ Analysis Image ═══ */
+  .aimg {
+    width: 100%; aspect-ratio: 5/3.5; border-radius: 18px;
+    background: linear-gradient(145deg, var(--sand), #ddd5c9);
+    border: 1px solid var(--line); position: relative;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .aimg .product-vis {
+    width: 120px; height: 140px; background: linear-gradient(145deg, #d4cfc5, #c9c2b6);
+    border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.5);
+  }
+  .aimg .product-vis .pv-brand { font-size: 8px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; }
+  .aimg .product-vis .pv-icon { font-size: 40px; margin: 4px 0; filter: grayscale(0.3); }
+  .aimg .product-vis .pv-label { font-size: 9px; color: var(--text-sec); font-weight: 500; }
+  .aimg .cond-pill {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--green); color: white; padding: 5px 12px;
+    border-radius: 20px; font-size: 11px; font-weight: 700;
+    box-shadow: 0 2px 8px rgba(47,74,60,0.25);
+  }
+
+  /* ═══ Analysis Details ═══ */
+  .a-brand { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--copper); font-weight: 700; }
+  .a-name { font-size: 21px; font-weight: 700; color: var(--charcoal); margin: 2px 0; letter-spacing: -0.3px; line-height: 1.2; }
+  .a-meta { font-size: 12px; color: var(--text-sec); margin-bottom: 16px; }
+
+  .price-block { display: flex; align-items: baseline; gap: 10px; margin-bottom: 18px; }
+  .pb-price { font-family: 'DM Serif Display', serif; font-size: 42px; color: var(--green); line-height: 1; letter-spacing: -1px; }
+  .pb-info {}
+  .pb-label { font-size: 12px; font-weight: 600; color: var(--charcoal); }
+  .pb-orig { font-size: 11px; color: var(--text-muted); text-decoration: line-through; }
+
+  .dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+  .dcell {
+    background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+  }
+  .dcell .dl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); font-weight: 700; margin-bottom: 2px; }
+  .dcell .dv { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+
+  /* ═══ Info Boxes ═══ */
+  .ibox { border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+  .ibox .il { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 5px; }
+  .ibox p, .ibox ul { font-size: 12.5px; line-height: 1.6; color: var(--text-sec); }
+  .ibox ul { padding-left: 16px; margin: 0; }
+  .ibox ul li { margin-bottom: 2px; }
+  .ibox.bone { background: var(--white); border: 1px solid var(--line); }
+  .ibox.bone .il { color: var(--text-muted); }
+  .ibox.copper { background: var(--copper-bg); border: 1px solid var(--copper-border); }
+  .ibox.copper .il { color: var(--copper); }
+  .ibox.green { background: var(--green-bg); border: 1px solid var(--green-border); }
+  .ibox.green .il { color: var(--green); }
+
+  /* ═══ Goal Grid ═══ */
+  .ggrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .goal {
+    background: var(--white); border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 16px 12px; cursor: pointer; transition: all 0.15s; text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  }
+  .goal:hover { border-color: rgba(184,115,51,0.3); }
+  .goal.sel { border-color: var(--copper); background: var(--copper-bg); box-shadow: 0 0 0 1px var(--copper), 0 2px 10px rgba(184,115,51,0.1); }
+  .goal .gi { font-size: 24px; margin-bottom: 6px; }
+  .goal .gn { font-size: 12.5px; font-weight: 700; color: var(--charcoal); }
+  .goal .gs { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
+
+  /* ═══ Recommended Card ═══ */
+  .reccard {
+    background: var(--white); border: 1.5px solid var(--copper); border-radius: 16px;
+    padding: 18px; margin-bottom: 14px;
+    box-shadow: 0 0 0 1px rgba(184,115,51,0.1), 0 4px 16px rgba(184,115,51,0.08);
+  }
+  .rec-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--copper); margin-bottom: 10px; }
+  .rec-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .rec-logo {
+    width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0;
+  }
+  .rec-nm { font-size: 15px; font-weight: 700; color: var(--charcoal); }
+  .rec-sub { font-size: 11px; color: var(--text-muted); }
+  .rec-pay { font-size: 24px; font-weight: 800; color: var(--green); letter-spacing: -0.3px; margin-bottom: 2px; }
+  .rec-est { font-size: 11px; color: var(--text-muted); margin-bottom: 14px; }
+
+  /* ═══ Platform Cards ═══ */
+  .plat {
+    background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px; box-shadow: 0 1px 6px rgba(0,0,0,0.04); margin-bottom: 10px; position: relative;
+  }
+  .plat.best { border-color: var(--copper); box-shadow: 0 0 0 1px rgba(184,115,51,0.15), 0 4px 16px rgba(184,115,51,0.08); }
+  .plat.best::before {
+    content: 'RECOMMENDED'; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    background: var(--copper); color: white; font-size: 8px; font-weight: 700;
+    letter-spacing: 0.7px; padding: 3px 10px; border-radius: 10px;
+  }
+  .plat-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .plat-logo {
+    width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0;
+  }
+  .plat-nm { font-size: 15px; font-weight: 700; color: var(--charcoal); }
+  .plat-bf { font-size: 10.5px; color: var(--text-muted); }
+  .plat-pay { font-size: 24px; font-weight: 800; color: var(--green); letter-spacing: -0.3px; }
+  .plat-pl { font-size: 10.5px; color: var(--text-muted); margin-bottom: 12px; }
+  .plat-d { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--sand); font-size: 12px; }
+  .plat-d:last-of-type { border-bottom: none; }
+  .plat-d .l { color: var(--text-sec); }
+  .plat-d .v { font-weight: 600; color: var(--charcoal); text-align: right; max-width: 56%; }
+  .plat-cta {
+    width: 100%; padding: 12px; border: none; border-radius: 10px;
+    font-size: 13px; font-weight: 700; font-family: 'DM Sans', sans-serif;
+    color: white; cursor: pointer; margin-top: 14px; transition: opacity 0.15s;
+  }
+  .plat-cta:hover { opacity: 0.9; }
+
+  /* ═══ Vary Items ═══ */
+  .vary { display: flex; gap: 10px; margin-bottom: 10px; }
+  .vary-ic { width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .vary h4 { font-size: 12px; font-weight: 700; color: var(--charcoal); }
+  .vary p { font-size: 11px; color: var(--text-sec); line-height: 1.4; }
+
+  /* ═══ Confirm Card ═══ */
+  .confirm {
+    background: var(--white); border: 1px solid var(--line); border-radius: 20px;
+    padding: 28px 22px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .confirm .ci { font-size: 44px; margin-bottom: 10px; }
+  .confirm h2 { font-size: 20px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+  .confirm .csub { font-size: 13px; color: var(--text-sec); line-height: 1.5; margin-bottom: 20px; }
+  .step-list { text-align: left; margin-bottom: 20px; }
+  .step-i { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--sand); }
+  .step-i:last-child { border-bottom: none; }
+  .step-n {
+    width: 24px; height: 24px; border-radius: 50%; background: var(--green-bg);
+    color: var(--green); font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-t { font-size: 13px; color: var(--text-sec); line-height: 1.45; }
+  .step-t strong { color: var(--charcoal); }
+
+  /* ═══ Stat Cards ═══ */
+  .stats3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .scard {
+    background: var(--white); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .sc-v { font-size: 20px; font-weight: 800; color: var(--charcoal); letter-spacing: -0.3px; }
+  .sc-v.green { color: var(--green); }
+  .sc-l { font-size: 9px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+
+  /* ═══ History Items ═══ */
+  .hitem {
+    display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+    background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03); margin-bottom: 8px;
+  }
+  .hitem .hi-inf { flex: 1; }
+  .hitem .hi-nm { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+  .hitem .hi-mt { font-size: 10.5px; color: var(--text-muted); }
+  .hitem .hi-pay { text-align: right; }
+  .hitem .hi-amt { font-size: 14px; font-weight: 700; color: var(--green); }
+  .hitem .hi-pl { font-size: 10px; color: var(--text-muted); }
+
+  /* ═══ Profile ═══ */
+  .profcard {
+    background: var(--white); border: 1px solid var(--line); border-radius: 18px;
+    padding: 24px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 14px;
+  }
+  .profcard .pav {
+    width: 60px; height: 60px; border-radius: 50%; background: var(--green);
+    color: white; font-size: 20px; font-weight: 700; display: flex; align-items: center;
+    justify-content: center; margin: 0 auto 8px; box-shadow: 0 3px 10px rgba(47,74,60,0.2);
+  }
+  .profcard .pnm { font-size: 17px; font-weight: 700; color: var(--charcoal); }
+  .profcard .pem { font-size: 11px; color: var(--text-muted); }
+  .profcard .pstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+  .pstat-v { font-size: 18px; font-weight: 800; color: var(--charcoal); }
+  .pstat-l { font-size: 9px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); font-weight: 600; }
+
+  .sgrp { margin-bottom: 14px; }
+  .sgrp h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); margin-bottom: 6px; padding-left: 4px; }
+  .srow {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 14px; background: var(--white); border: 1px solid var(--line);
+    border-radius: 10px; margin-bottom: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  }
+  .srow .sl { font-size: 13px; font-weight: 500; color: var(--charcoal); }
+  .srow .sv { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+  .arr { color: var(--line); font-size: 16px; }
+
+  /* ═══ Back Row ═══ */
+  .back {
+    display: flex; align-items: center; gap: 6px; margin-bottom: 14px; cursor: pointer;
+    padding: 2px 0;
+  }
+  .back svg { width: 18px; height: 18px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
+  .back span { font-size: 14px; font-weight: 600; color: var(--charcoal); }
+
+  /* ═══ Button overrides for this context ═══ */
+  .btn { border-radius: 12px; font-family: 'DM Sans', sans-serif; }
+</style>
+</head>
+<body>
+<!-- ═══ Password Gate ═══ -->
+<div id="amale-gate" style="position:fixed;inset:0;z-index:9999;background:#F5F1EB;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif">
+  <div style="text-align:center;max-width:360px;width:100%;padding:20px">
+    <div style="width:48px;height:48px;background:#B87333;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:24px;color:white;margin-bottom:18px">A</div>
+    <div style="font-size:22px;font-weight:700;color:#1F2A24;letter-spacing:-0.3px">Amalé Resale Intelligence</div>
+    <div style="font-size:13px;color:#B87333;font-weight:600;margin-top:4px">Private concept review</div>
+    <div style="font-size:13px;color:#5C6B62;margin-top:8px;margin-bottom:24px">Enter password to continue</div>
+    <input id="amale-pw" type="password" placeholder="Password" autocomplete="off" style="width:100%;padding:12px 16px;border:1px solid #D6CEC4;border-radius:10px;font-size:14px;font-family:inherit;background:white;outline:none;text-align:center;transition:border-color 0.15s" onfocus="this.style.borderColor='#B87333'" onblur="this.style.borderColor='#D6CEC4'">
+    <div id="amale-err" style="font-size:12px;color:#A65240;margin-top:8px;min-height:18px"></div>
+    <button id="amale-btn" style="margin-top:8px;width:100%;padding:12px;border:none;border-radius:10px;background:#2F4A3C;color:white;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:background 0.15s" onmouseover="this.style.background='#1C3328'" onmouseout="this.style.background='#2F4A3C'">Continue</button>
+    <div style="font-size:10px;color:#8A9590;margin-top:20px;line-height:1.5">For concept review only. Uses demo data. Not a production app.</div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='amale_access';
+  if(sessionStorage.getItem(KEY)==='granted'){
+    document.getElementById('amale-gate').remove();return;
+  }
+  document.body.style.overflow='hidden';
+  var pw=document.getElementById('amale-pw'),err=document.getElementById('amale-err'),btn=document.getElementById('amale-btn');
+  function tryAuth(){
+    if(pw.value==='amale-demo'){
+      sessionStorage.setItem(KEY,'granted');
+      document.getElementById('amale-gate').remove();
+      document.body.style.overflow='';
+    }else{
+      err.textContent='Incorrect password. Please try again.';
+      pw.value='';pw.focus();
+      pw.style.borderColor='#A65240';
+      setTimeout(function(){pw.style.borderColor='#D6CEC4'},1500);
+    }
+  }
+  btn.addEventListener('click',tryAuth);
+  pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryAuth()});
+  pw.focus();
+})();
+</script>
+<!-- ═══ /Password Gate ═══ -->
+
+
+<div class="phone">
+<div class="phone-inner">
+
+  <!-- Status Bar -->
+  <div class="statusbar">
+    <span>9:41</span>
+    <div class="sb-icons">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="1" y="8" width="3" height="10" rx="1"/><rect x="6" y="5" width="3" height="13" rx="1"/><rect x="11" y="2" width="3" height="16" rx="1"/><rect x="16" y="0" width="3" height="18" rx="1"/></svg>
+      <svg viewBox="0 0 28 14" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5"/><rect x="23.5" y="3" width="2.5" height="5.5" rx="1" fill="currentColor"/><rect x="2" y="2" width="16" height="8" rx="1.5" fill="var(--green)"/></svg>
+    </div>
+  </div>
+
+  <!-- App Header -->
+  <div class="appbar">
+    <div class="appbar-left">
+      <span class="ab-mark">A</span>
+      <div class="ab-text"><div class="ab-name">Amalé</div><div class="ab-sub">Resale Intelligence</div></div>
+    </div>
+    <div class="appbar-right">
+      <div class="ab-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="ab-dot"></span></div>
+      <div class="ab-avatar">DU</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ HOME ═══════════════ -->
+  <div class="pg active" id="pg-home">
+    <div class="hero-card">
+      <div class="hc-row">
+        <div class="hc-stat"><div class="hc-label">Closet Value</div><div class="hc-val">$847</div><div class="hc-sub">12 items scanned</div></div>
+        <div class="hc-div"></div>
+        <div class="hc-stat"><div class="hc-label">Ready to Sell</div><div class="hc-val copper">$312</div><div class="hc-sub">4 items at peak value</div></div>
+      </div>
+    </div>
+
+    <div class="shd"><h3>Recommended</h3></div>
+
+    <div class="acard" onclick="goTab('analysis')">
+      <div class="ac-ic" style="background:var(--success-bg);color:var(--success)">✓</div>
+      <div class="ac-body"><h4>4 items ready to sell — $312 est.</h4><p>These items are at peak demand. Sell now for best return.</p></div>
+      <span class="ac-arr">›</span>
+    </div>
+    <div class="acard">
+      <div class="ac-ic" style="background:var(--copper-bg);color:var(--copper)">★</div>
+      <div class="ac-body"><h4>2 items have rising demand</h4><p>Sell before November for peak Fall/Winter pricing.</p></div>
+      <span class="ac-arr">›</span>
+    </div>
+    <div class="acard">
+      <div class="ac-ic" style="background:var(--info-bg);color:var(--info)">⇢</div>
+      <div class="ac-body"><h4>Switch platforms for 3 items</h4><p>You'd earn $24 more by selling these on Poshmark.</p></div>
+      <span class="ac-arr">›</span>
+    </div>
+
+    <div class="shd" style="margin-top:16px"><h3>Recent Scans</h3><span class="lnk" onclick="goTab('closet')">See all</span></div>
+    <div class="card" style="padding:2px 16px;border-radius:16px">
+      <div class="irow" onclick="goTab('analysis')">
+        <div class="pthumb brand-polo">PRL</div>
+        <div class="irow-info"><div class="irow-name">Cable Knit Cotton Sweater</div><div class="irow-meta">Polo Ralph Lauren · Size M</div><div class="irow-val">$43 estimated</div></div>
+        <span class="badge badge-green">Good</span>
+      </div>
+      <div class="irow">
+        <div class="pthumb brand-pat">PAT</div>
+        <div class="irow-info"><div class="irow-name">Nano Puff Jacket</div><div class="irow-meta">Patagonia · Size M</div><div class="irow-val">$118 estimated</div></div>
+        <span class="badge badge-green">V. Good</span>
+      </div>
+      <div class="irow">
+        <div class="pthumb brand-levis">501</div>
+        <div class="irow-info"><div class="irow-name">501 Original Jeans</div><div class="irow-meta">Levi's · Size 30</div><div class="irow-val">$42 estimated</div></div>
+        <span class="badge badge-green">Good</span>
+      </div>
+      <div class="irow">
+        <div class="pthumb brand-lulu">LLL</div>
+        <div class="irow-info"><div class="irow-name">Align Leggings 25"</div><div class="irow-meta">Lululemon · Size 6</div><div class="irow-val">$48 estimated</div></div>
+        <span class="badge badge-green">Good</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ CLOSET ═══════════════ -->
+  <div class="pg" id="pg-closet">
+    <div class="shd"><h3>My Closet</h3><span style="font-size:11px;color:var(--text-muted)">12 items · $847</span></div>
+    <div class="chips">
+      <span class="chip active">All</span><span class="chip">Ready to Sell</span><span class="chip">Rising Value</span><span class="chip">Needs Review</span>
+    </div>
+    <div class="card" style="padding:2px 16px;border-radius:16px">
+      <div class="irow" onclick="goTab('analysis')"><div class="pthumb brand-polo">PRL</div><div class="irow-info"><div class="irow-name">Cable Knit Cotton Sweater</div><div class="irow-meta">Polo RL · M · Cream</div><div class="irow-val">$43</div></div><span class="badge badge-green">Good</span></div>
+      <div class="irow"><div class="pthumb brand-pat">PAT</div><div class="irow-info"><div class="irow-name">Nano Puff Jacket</div><div class="irow-meta">Patagonia · M · Black</div><div class="irow-val">$118</div></div><span class="badge badge-green">V. Good</span></div>
+      <div class="irow"><div class="pthumb brand-levis">501</div><div class="irow-info"><div class="irow-name">501 Original Jeans</div><div class="irow-meta">Levi's · 30 · Indigo</div><div class="irow-val">$42</div></div><span class="badge badge-green">Good</span></div>
+      <div class="irow"><div class="pthumb brand-lulu">LLL</div><div class="irow-info"><div class="irow-name">Align Leggings 25"</div><div class="irow-meta">Lululemon · 6 · Black</div><div class="irow-val">$48</div></div><span class="badge badge-green">Good</span></div>
+      <div class="irow"><div class="pthumb brand-coach">CO</div><div class="irow-info"><div class="irow-name">Tabby Shoulder Bag</div><div class="irow-meta">Coach · Saddle Brown</div><div class="irow-val">$145</div></div><span class="badge badge-info">Review</span></div>
+      <div class="irow"><div class="pthumb brand-ref">REF</div><div class="irow-info"><div class="irow-name">Reformation Midi Dress</div><div class="irow-meta">Reformation · 6 · Navy</div><div class="irow-val">$104</div></div><span class="badge badge-green">Good</span></div>
+      <div class="irow"><div class="pthumb brand-arc">ARC</div><div class="irow-info"><div class="irow-name">Beta AR Jacket</div><div class="irow-meta">Arc'teryx · M · Black</div><div class="irow-val">$235</div></div><span class="badge badge-green">V. Good</span></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ SCAN ═══════════════ -->
+  <div class="pg" id="pg-scan">
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:18px;font-weight:700;color:var(--charcoal);letter-spacing:-0.2px">Scan an Item</div>
+      <div style="font-size:12px;color:var(--text-sec);margin-top:3px">Photo or label scan for instant resale valuation</div>
+    </div>
+    <div class="scanbox">
+      <div class="corners"></div>
+      <div class="sline"></div>
+      <div class="center">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8h.01M8 12h.01M8 16h.01M12 8h4M12 12h4M12 16h4"/></svg>
+        <div class="t1">Point camera at your item</div>
+        <div class="t2">Or scan the care label / tag</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button class="btn btn-copper btn-block" style="flex:1;padding:13px" onclick="goTab('analysis')">📷 Take Photo</button>
+      <button class="btn btn-secondary" style="flex:1;padding:13px">📤 Upload</button>
+    </div>
+    <div class="card" style="padding:18px;border-radius:16px">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:10px">How it works</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:center"><span style="width:24px;height:24px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</span><span style="font-size:12.5px;color:var(--text-sec)">Snap a photo of your item or its label</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="width:24px;height:24px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</span><span style="font-size:12.5px;color:var(--text-sec)">Amalé identifies brand, category & details</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="width:24px;height:24px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</span><span style="font-size:12.5px;color:var(--text-sec)">Get instant resale value & platform comparison</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span style="width:24px;height:24px;border-radius:50%;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">4</span><span style="font-size:12.5px;color:var(--text-sec)">Choose your goal and pick where to sell</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ ANALYSIS ═══════════════ -->
+  <div class="pg" id="pg-analysis">
+    <div class="back" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>Item Analysis</span></div>
+
+    <div class="aimg">
+      <div class="product-vis">
+        <div class="pv-brand">Polo RL</div>
+        <div class="pv-icon">👔</div>
+        <div class="pv-label">Cable Knit Sweater</div>
+      </div>
+      <span class="cond-pill">4/5 Good</span>
+    </div>
+
+    <div class="a-brand">Polo Ralph Lauren</div>
+    <div class="a-name">Cable Knit Cotton Sweater</div>
+    <div class="a-meta">Women's · Size M · Cream · 100% Cotton</div>
+
+    <div class="price-block">
+      <div class="pb-price">$43</div>
+      <div class="pb-info"><div class="pb-label">Average Resale Value</div><div class="pb-orig">$128 original</div></div>
+    </div>
+
+    <div class="dgrid">
+      <div class="dcell"><div class="dl">Condition</div><div class="dv">4/5 Good</div></div>
+      <div class="dcell"><div class="dl">Value Retention</div><div class="dv">34%</div></div>
+      <div class="dcell"><div class="dl">Estimated Age</div><div class="dv">1–3 years</div></div>
+      <div class="dcell"><div class="dl">Season</div><div class="dv">Fall / Winter</div></div>
+      <div class="dcell"><div class="dl">Style #</div><div class="dv">710775885001</div></div>
+      <div class="dcell"><div class="dl">Days to Sell</div><div class="dv">14–22 days</div></div>
+    </div>
+
+    <div class="ibox bone">
+      <div class="il">Condition Notes</div>
+      <p>Light wear. No stains, holes, or significant flaws. Gentle pilling on fabric. Cable knit pattern intact. Color slightly faded from original cream.</p>
+    </div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--charcoal);margin:14px 0 8px">What's your goal?</div>
+    <div class="ggrid">
+      <div class="goal" onclick="pickGoal(this)"><div class="gi">💰</div><div class="gn">Maximize Cash</div><div class="gs">Highest payout</div></div>
+      <div class="goal" onclick="pickGoal(this)"><div class="gi">⚡</div><div class="gn">Sell Fast</div><div class="gs">Quickest sale</div></div>
+      <div class="goal sel" onclick="pickGoal(this)"><div class="gi">✨</div><div class="gn">Least Effort</div><div class="gs">Ship & forget</div></div>
+      <div class="goal" onclick="pickGoal(this)"><div class="gi">♻️</div><div class="gn">Most Sustainable</div><div class="gs">Best for the planet</div></div>
+    </div>
+
+    <div class="reccard">
+      <div class="rec-tag">Recommended for You</div>
+      <div class="rec-hd">
+        <div class="rec-logo" style="background:var(--copper-bg);color:var(--copper);border:1px solid var(--copper-border)">tU</div>
+        <div><div class="rec-nm">thredUP</div><div class="rec-sub">Best for least effort — ship & forget</div></div>
+      </div>
+      <div class="rec-pay">$28–$35</div>
+      <div class="rec-est">Estimated payout · thredUP Credit</div>
+      <button class="btn btn-copper btn-block" style="padding:13px" onclick="goTab('sell')">Sell on thredUP</button>
+    </div>
+
+    <button class="btn btn-secondary btn-block" style="margin-bottom:16px;padding:13px" onclick="goTab('compare')">Compare All Platforms →</button>
+
+    <div style="font-size:14px;font-weight:700;color:var(--charcoal);margin-bottom:10px">Why Prices Vary</div>
+    <div class="vary"><div class="vary-ic" style="background:var(--copper-bg);color:var(--copper)">%</div><div><h4>Platform Fees</h4><p>Each platform charges different fees — from 0% to 20%.</p></div></div>
+    <div class="vary"><div class="vary-ic" style="background:var(--green-bg);color:var(--green)">⚙</div><div><h4>Selling Model</h4><p>Consignment, peer-to-peer, and auction each price differently.</p></div></div>
+    <div class="vary"><div class="vary-ic" style="background:var(--info-bg);color:var(--info)">★</div><div><h4>Buyer Audience</h4><p>Luxury platforms attract higher-paying buyers.</p></div></div>
+    <div class="vary"><div class="vary-ic" style="background:var(--success-bg);color:var(--success)">⏱</div><div><h4>Time vs. Payout</h4><p>Faster payout = lower price. Higher payout takes more effort.</p></div></div>
+
+    <div class="ibox copper" style="margin-top:12px">
+      <div class="il">Tips to Earn More</div>
+      <ul>
+        <li>Sell before November for peak Fall/Winter demand</li>
+        <li>Photograph on a neutral background for faster sale</li>
+        <li>Include measurements — buyers pay more with confidence</li>
+        <li>Polo Ralph Lauren cotton knits do well on Poshmark</li>
+        <li>Clean and steam the item before listing</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ COMPARE ═══════════════ -->
+  <div class="pg" id="pg-compare">
+    <div class="back" onclick="goTab('analysis')"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>All Options Compared</span></div>
+    <div style="text-align:center;font-size:11.5px;color:var(--text-sec);margin-bottom:14px">Polo Ralph Lauren Cable Knit Sweater · Good · Size M</div>
+
+    <div class="plat best">
+      <div class="plat-hd"><div class="plat-logo" style="background:var(--copper-bg);color:var(--copper);border:1px solid var(--copper-border)">tU</div><div><div class="plat-nm">thredUP</div><div class="plat-bf">Least effort — ship & forget</div></div></div>
+      <div class="plat-pay">$28–$35</div><div class="plat-pl">Estimated payout</div>
+      <div class="plat-d"><span class="l">Processing</span><span class="v">2–3 weeks</span></div>
+      <div class="plat-d"><span class="l">Payout Method</span><span class="v">thredUP Credit</span></div>
+      <div class="plat-d"><span class="l">Seller Fees</span><span class="v">None</span></div>
+      <div class="plat-d"><span class="l">You do</span><span class="v">Ship it. That's it.</span></div>
+      <button class="plat-cta" style="background:var(--copper)" onclick="goTab('sell')">Sell on thredUP</button>
+    </div>
+
+    <div class="plat">
+      <div class="plat-hd"><div class="plat-logo" style="background:var(--danger-bg);color:var(--danger);border:1px solid rgba(166,82,64,0.12)">PM</div><div><div class="plat-nm">Poshmark</div><div class="plat-bf">Maximize return with active selling</div></div></div>
+      <div class="plat-pay">$45–$55</div><div class="plat-pl">Estimated proceeds</div>
+      <div class="plat-d"><span class="l">Processing</span><span class="v">Depends on buyer</span></div>
+      <div class="plat-d"><span class="l">Payout Method</span><span class="v">Poshmark Balance</span></div>
+      <div class="plat-d"><span class="l">Seller Fees</span><span class="v">20% seller fee</span></div>
+      <div class="plat-d"><span class="l">You do</span><span class="v">Photo, list, ship to buyer</span></div>
+      <button class="plat-cta" style="background:var(--green)">Sell on Poshmark</button>
+    </div>
+
+    <div class="plat">
+      <div class="plat-hd"><div class="plat-logo" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">RR</div><div><div class="plat-nm">The RealReal</div><div class="plat-bf">Luxury items & white-glove service</div></div></div>
+      <div class="plat-pay">$50–$65</div><div class="plat-pl">Estimated payout</div>
+      <div class="plat-d"><span class="l">Processing</span><span class="v">2–4 weeks</span></div>
+      <div class="plat-d"><span class="l">Payout Method</span><span class="v">Direct Deposit</span></div>
+      <div class="plat-d"><span class="l">Seller Fees</span><span class="v">Commission-based</span></div>
+      <div class="plat-d"><span class="l">You do</span><span class="v">Ship or schedule pickup</span></div>
+      <button class="plat-cta" style="background:var(--green)">Sell on The RealReal</button>
+    </div>
+
+    <div class="plat">
+      <div class="plat-hd"><div class="plat-logo" style="background:var(--warning-bg);color:var(--warning);border:1px solid rgba(196,136,47,0.12)">eB</div><div><div class="plat-nm">eBay</div><div class="plat-bf">Auction-style & widest audience</div></div></div>
+      <div class="plat-pay">$40–$50</div><div class="plat-pl">Estimated proceeds</div>
+      <div class="plat-d"><span class="l">Processing</span><span class="v">Auction or Buy Now</span></div>
+      <div class="plat-d"><span class="l">Payout Method</span><span class="v">Managed Payments</span></div>
+      <div class="plat-d"><span class="l">Seller Fees</span><span class="v">~13% final value fee</span></div>
+      <div class="plat-d"><span class="l">You do</span><span class="v">Photo, list, pack, ship</span></div>
+      <button class="plat-cta" style="background:var(--green)">Sell on eBay</button>
+    </div>
+
+    <div class="ibox bone" style="margin-top:2px">
+      <div class="il">About these estimates</div>
+      <p>Based on comparable sales across platforms, factoring in condition, brand, demand, and seasonal trends. Actual payouts may vary.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ SELL ═══════════════ -->
+  <div class="pg" id="pg-sell">
+    <div class="back" onclick="goTab('compare')"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>Sell on thredUP</span></div>
+    <div class="confirm">
+      <div class="ci">📦</div>
+      <h2>Ready to Ship!</h2>
+      <div class="csub">Your <strong>Polo Ralph Lauren Cable Knit Sweater</strong> will be sent to thredUP.<br>Estimated payout: <strong style="color:var(--green)">$28–$35</strong> as thredUP Credit.</div>
+      <div class="step-list">
+        <div class="step-i"><div class="step-n">1</div><div class="step-t"><strong>Request a free Clean Out Kit</strong> from thredUP</div></div>
+        <div class="step-i"><div class="step-n">2</div><div class="step-t"><strong>Pack your item</strong> in the prepaid bag</div></div>
+        <div class="step-i"><div class="step-n">3</div><div class="step-t"><strong>Drop it off</strong> at any USPS location</div></div>
+        <div class="step-i"><div class="step-n">4</div><div class="step-t"><strong>Get paid</strong> when it sells (2–3 weeks)</div></div>
+      </div>
+      <button class="btn btn-copper btn-block" style="padding:14px;font-size:14px" onclick="goTab('sold')">Request Clean Out Kit</button>
+      <button class="btn btn-ghost btn-block" style="margin-top:6px" onclick="goTab('compare')">Compare other options</button>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ SOLD ═══════════════ -->
+  <div class="pg" id="pg-sold">
+    <div class="shd"><h3>Sold / History</h3></div>
+    <div style="font-size:12px;color:var(--text-sec);margin-bottom:12px">Your completed resale transactions</div>
+    <div class="stats3">
+      <div class="scard"><div class="sc-v">7</div><div class="sc-l">Items Sold</div></div>
+      <div class="scard"><div class="sc-v green">$412</div><div class="sc-l">Total Earned</div></div>
+      <div class="scard"><div class="sc-v">$59</div><div class="sc-l">Avg Payout</div></div>
+    </div>
+    <div class="hitem"><div class="pthumb brand-pat">PAT</div><div class="hi-inf"><div class="hi-nm">Nano Puff Jacket</div><div class="hi-mt">Patagonia · Jun 12 · thredUP</div></div><div class="hi-pay"><div class="hi-amt">$98</div><div class="hi-pl">thredUP</div></div></div>
+    <div class="hitem"><div class="pthumb brand-levis">501</div><div class="hi-inf"><div class="hi-nm">501 Original Jeans</div><div class="hi-mt">Levi's · May 28 · Poshmark</div></div><div class="hi-pay"><div class="hi-amt">$44</div><div class="hi-pl">Poshmark</div></div></div>
+    <div class="hitem"><div class="pthumb brand-ref">REF</div><div class="hi-inf"><div class="hi-nm">Reformation Midi Dress</div><div class="hi-mt">Reformation · May 15 · RealReal</div></div><div class="hi-pay"><div class="hi-amt">$86</div><div class="hi-pl">The RealReal</div></div></div>
+    <div class="hitem"><div class="pthumb brand-lulu">LLL</div><div class="hi-inf"><div class="hi-nm">Align Leggings 25"</div><div class="hi-mt">Lululemon · May 3 · Poshmark</div></div><div class="hi-pay"><div class="hi-amt">$52</div><div class="hi-pl">Poshmark</div></div></div>
+    <div class="hitem"><div class="pthumb brand-jcrew">JC</div><div class="hi-inf"><div class="hi-nm">Merino Cardigan</div><div class="hi-mt">J.Crew · Apr 22 · thredUP</div></div><div class="hi-pay"><div class="hi-amt">$24</div><div class="hi-pl">thredUP</div></div></div>
+    <div class="hitem"><div class="pthumb brand-coach">CO</div><div class="hi-inf"><div class="hi-nm">Classic Flap Bag</div><div class="hi-mt">Coach · Apr 10 · RealReal</div></div><div class="hi-pay"><div class="hi-amt">$68</div><div class="hi-pl">The RealReal</div></div></div>
+    <div class="hitem"><div class="pthumb brand-nf">TNF</div><div class="hi-inf"><div class="hi-nm">Fleece Jacket</div><div class="hi-mt">North Face · Mar 28 · eBay</div></div><div class="hi-pay"><div class="hi-amt">$40</div><div class="hi-pl">eBay</div></div></div>
+  </div>
+
+
+  <!-- ═══════════════ PROFILE ═══════════════ -->
+  <div class="pg" id="pg-profile">
+    <div class="profcard">
+      <div class="pav">DU</div>
+      <div class="pnm">Demo User</div>
+      <div class="pem">demo@amale.com</div>
+      <div class="pstats">
+        <div style="text-align:center"><div class="pstat-v">12</div><div class="pstat-l">Scanned</div></div>
+        <div style="text-align:center"><div class="pstat-v">7</div><div class="pstat-l">Sold</div></div>
+        <div style="text-align:center"><div class="pstat-v">$412</div><div class="pstat-l">Earned</div></div>
+      </div>
+    </div>
+    <div class="sgrp"><h4>Account</h4>
+      <div class="srow"><span class="sl">Email</span><span class="sv">demo@amale.com <span class="arr">›</span></span></div>
+      <div class="srow"><span class="sl">Location</span><span class="sv">United States <span class="arr">›</span></span></div>
+      <div class="srow"><span class="sl">Currency</span><span class="sv">USD ($) <span class="arr">›</span></span></div>
+    </div>
+    <div class="sgrp"><h4>Preferences</h4>
+      <div class="srow"><span class="sl">Default Goal</span><span class="sv">Least Effort <span class="arr">›</span></span></div>
+      <div class="srow"><span class="sl">Notifications</span><span class="sv"><div class="toggle on"></div></span></div>
+      <div class="srow"><span class="sl">Price Alerts</span><span class="sv"><div class="toggle on"></div></span></div>
+      <div class="srow"><span class="sl">Payout Preferences</span><span class="sv">Credit <span class="arr">›</span></span></div>
+    </div>
+    <div class="sgrp"><h4>Connected Platforms</h4>
+      <div class="srow"><span class="sl">thredUP</span><span class="sv"><span class="badge badge-green">Connected</span></span></div>
+      <div class="srow"><span class="sl">Poshmark</span><span class="sv"><span class="badge badge-muted">Connect</span></span></div>
+      <div class="srow"><span class="sl">The RealReal</span><span class="sv"><span class="badge badge-muted">Connect</span></span></div>
+      <div class="srow"><span class="sl">eBay</span><span class="sv"><span class="badge badge-muted">Connect</span></span></div>
+    </div>
+    <div style="text-align:center;margin-top:8px;padding:10px">
+      <div style="font-size:10px;color:var(--text-muted);line-height:1.6"><strong style="color:var(--text-sec)">Amalé Product Intelligence</strong><br>Product data in. Resale value intelligence out.</div>
+    </div>
+  </div>
+
+</div><!-- phone-inner -->
+
+<!-- Bottom Nav -->
+<nav class="bnav">
+  <button class="bnav-t active" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</button>
+  <button class="bnav-t" data-tab="closet" onclick="goTab('closet')"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Closet</button>
+  <button class="bnav-t scan-t" data-tab="scan" onclick="goTab('scan')"><div class="scan-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8h.01M8 12h.01M8 16h.01M12 8h4M12 12h4M12 16h4"/></svg></div>Scan</button>
+  <button class="bnav-t" data-tab="sold" onclick="goTab('sold')"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sold</button>
+  <button class="bnav-t" data-tab="profile" onclick="goTab('profile')"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+</nav>
+
+</div><!-- phone -->
+
+<script>
+var tabs={home:'pg-home',closet:'pg-closet',scan:'pg-scan',analysis:'pg-analysis',compare:'pg-compare',sell:'pg-sell',sold:'pg-sold',profile:'pg-profile'};
+var navTabs=['home','closet','scan','sold','profile'];
+function goTab(id){
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('active')});
+  document.getElementById(tabs[id]).classList.add('active');
+  document.querySelectorAll('.bnav-t').forEach(function(t){t.classList.remove('active')});
+  var nt=navTabs.indexOf(id)>=0?id:(id==='analysis'||id==='compare'||id==='sell'?'home':null);
+  if(nt){var b=document.querySelector('.bnav-t[data-tab="'+nt+'"]');if(b)b.classList.add('active')}
+  document.querySelector('.phone-inner').scrollTo(0,0);
+}
+function pickGoal(el){document.querySelectorAll('.goal').forEach(function(g){g.classList.remove('sel')});el.classList.add('sel')}
+</script>
+</body>
+</html>

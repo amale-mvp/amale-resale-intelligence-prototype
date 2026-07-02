@@ -406,6 +406,27 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
   text-align: center; padding: 12px; font-size: 12px; color: var(--text-muted);
   font-style: italic; margin-top: 16px;
 }
+.demo-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.demo-table th { text-align: left; padding: 10px 18px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); font-weight: 600; background: var(--bone); border-bottom: 1px solid var(--line); }
+.demo-table td { padding: 10px 18px; border-bottom: 1px solid var(--line); color: var(--charcoal); }
+.demo-table tr:last-child td { border-bottom: none; }
+.demo-table td:first-child { font-weight: 600; }
+.mini-kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
+.mini-kpi { padding: 14px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; text-align: center; box-shadow: var(--s); }
+.mini-kpi .mk-v { font-size: 20px; font-weight: 800; color: var(--green); }
+.mini-kpi .mk-v.copper { color: var(--copper); }
+.mini-kpi .mk-l { font-size: 10px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+.insight-feed { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.insight-item { padding: 12px 14px; background: var(--white); border: 1px solid var(--line); border-radius: 10px; font-size: 12px; color: var(--text-sec); line-height: 1.5; display: flex; align-items: flex-start; gap: 8px; box-shadow: var(--s); }
+.insight-item::before { content: ''; width: 6px; height: 6px; background: var(--copper); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.status-card { padding: 16px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--s); }
+.status-card .sc-l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+.status-card .sc-v { font-size: 13px; font-weight: 700; color: var(--charcoal); }
+.action-list { counter-reset: actions; }
+.action-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: var(--white); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 6px; box-shadow: var(--s); counter-increment: actions; }
+.action-item::before { content: counter(actions); width: 22px; height: 22px; background: var(--copper); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
+.action-item span { font-size: 12px; font-weight: 500; color: var(--charcoal); line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -938,46 +959,92 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 <div class="pg" id="pg-pricingmodel">
   <div class="ph"><h2>Standardized Resale Pricing Model</h2><p>One item. Multiple signals. One trusted pricing recommendation.</p></div>
 
-  <p style="font-size:13px;color:var(--text-sec);max-width:640px;line-height:1.6;margin-bottom:24px">Amalé combines item attributes, condition, market demand, comparable resale activity, seasonality, and platform rules to produce a trusted resale value range.</p>
+  <div class="grid-2" style="margin-bottom:24px">
+    <!-- Left: Pricing model diagram -->
+    <div>
+      <div style="text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px">Pricing Signals</div>
+      <div class="signal-ring">
+        <div class="signal-chip">Item Attributes</div>
+        <div class="signal-chip">Condition</div>
+        <div class="signal-chip">Market Demand</div>
+        <div class="signal-chip">Comparable Sales</div>
+        <div class="signal-chip">Platform Rules</div>
+        <div class="signal-chip">Seasonality</div>
+      </div>
+      <div style="text-align:center;margin:6px 0"><svg width="20" height="20" style="color:var(--copper)"><path d="M10 0v14M4 10l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2"/></svg></div>
+      <div class="engine-core" style="padding:20px 24px">
+        <div style="width:32px;height:32px;background:var(--copper);border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:16px;color:white;margin-bottom:6px">A</div>
+        <h3 style="font-size:13px">Amalé Product Intelligence Engine</h3>
+        <p>Product data in. Resale value intelligence out.</p>
+      </div>
+      <div style="text-align:center;margin:6px 0"><svg width="20" height="20" style="color:var(--copper)"><path d="M10 0v14M4 10l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2"/></svg></div>
+      <div class="output-cards">
+        <div class="output-card"><div class="ov">$28 – $65</div><div class="ol">Trusted Resale Value Range</div></div>
+        <div class="output-card"><div class="ov">87%</div><div class="ol">Pricing Confidence</div></div>
+        <div class="output-card"><div class="ov">thredUP</div><div class="ol">Recommended Path</div></div>
+      </div>
+    </div>
 
-  <div style="text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px">Pricing Signals</div>
-  <div class="signal-ring">
-    <div class="signal-chip">Item Attributes</div>
-    <div class="signal-chip">Condition</div>
-    <div class="signal-chip">Market Demand</div>
-    <div class="signal-chip">Comparable Sales</div>
-    <div class="signal-chip">Platform Rules</div>
-    <div class="signal-chip">Seasonality</div>
-    <div class="signal-chip">Historical Resale Data</div>
+    <!-- Right: Sample Item Analysis -->
+    <div class="scard" style="padding:20px">
+      <div class="sh"><h3>Sample Item Analysis</h3><span class="badge badge-copper">Demo Data</span></div>
+      <div style="font-size:15px;font-weight:700;color:var(--charcoal);margin-bottom:14px">Polo Ralph Lauren Cable Knit Cotton Sweater</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Brand</div><div style="font-size:12px;font-weight:600;color:var(--charcoal)">Polo Ralph Lauren</div></div>
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Category</div><div style="font-size:12px;font-weight:600;color:var(--charcoal)">Sweater / Knitwear</div></div>
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Condition</div><div style="font-size:12px;font-weight:600;color:var(--charcoal)">4/5 Good</div></div>
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Material</div><div style="font-size:12px;font-weight:600;color:var(--charcoal)">100% Cotton</div></div>
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Seasonality</div><div style="font-size:12px;font-weight:600;color:var(--charcoal)">Fall / Winter</div></div>
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Comparable Sales</div><div style="font-size:12px;font-weight:600;color:var(--green)">24 matched records</div></div>
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Market Demand</div><div style="font-size:12px;font-weight:600;color:var(--green)">High</div></div>
+        <div style="padding:10px;background:var(--bone);border-radius:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600">Platforms Checked</div><div style="font-size:12px;font-weight:600;color:var(--charcoal)">4 platforms</div></div>
+      </div>
+      <div style="padding:14px;background:var(--copper-bg);border:1px solid var(--copper-border);border-radius:10px;margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;font-weight:700;color:var(--copper)">Recommendation</div>
+          <span class="badge badge-green">87% confidence</span>
+        </div>
+        <div style="font-size:18px;font-weight:800;color:var(--charcoal)">$28 – $65</div>
+        <div style="font-size:11px;color:var(--text-sec);margin-top:2px">Recommended path: <strong>thredUP</strong> · Best goal fit: <strong>Least Effort</strong></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:4px">Strong convenience fit, acceptable payout range, lower seller effort</div>
+      </div>
+    </div>
   </div>
 
-  <div style="text-align:center;margin:8px 0"><svg width="20" height="24" style="color:var(--copper)"><path d="M10 0v18M4 14l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2"/></svg></div>
-
-  <div class="engine-core">
-    <div style="width:40px;height:40px;background:var(--copper);border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:white;margin-bottom:10px">A</div>
-    <h3>Amalé Product Intelligence Engine</h3>
-    <p>Product data in. Resale value intelligence out.</p>
-  </div>
-
-  <div style="text-align:center;margin:8px 0"><svg width="20" height="24" style="color:var(--copper)"><path d="M10 0v18M4 14l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2"/></svg></div>
-
-  <div class="output-cards">
-    <div class="output-card"><div class="ov">$28 – $65</div><div class="ol">Trusted Resale Value Range</div></div>
-    <div class="output-card"><div class="ov">87%</div><div class="ol">Pricing Confidence</div></div>
-    <div class="output-card"><div class="ov">thredUP</div><div class="ol">Recommended Resale Path</div></div>
+  <!-- Signal Impact Table -->
+  <div class="scard" style="padding:0;overflow:hidden">
+    <div class="sh" style="padding:14px 18px"><h3>Pricing Signal Breakdown</h3><span class="badge badge-muted">Sample analysis</span></div>
+    <table class="demo-table">
+      <thead><tr><th>Pricing Signal</th><th>Demo Value</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td>Condition</td><td>4/5 Good</td><td><span class="badge badge-green">Increases confidence</span></td></tr>
+        <tr><td>Comparable Sales</td><td>24 matches</td><td><span class="badge badge-green">Supports value range</span></td></tr>
+        <tr><td>Seasonality</td><td>Fall / Winter</td><td><span class="badge badge-green">Increases demand fit</span></td></tr>
+        <tr><td>Platform Rules</td><td>thredUP accepted category</td><td><span class="badge badge-brand">Supports recommendation</span></td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="bottomline"><p>One item. Multiple signals. One trusted pricing recommendation.</p></div>
+  <div class="section-note">Demo data for concept validation. Not connected to live marketplace data.</div>
 </div>
 
 
 <!-- ═══════════════ 11. THREDUP USE CASE ═══════════════ -->
 <div class="pg" id="pg-thredup">
-  <div class="ph"><h2>Focused thredUP Use Case</h2><p>Validating how Amalé's pricing intelligence works within thredUP's resale ecosystem.</p></div>
+  <div class="ph"><h2>Focused thredUP Use Case</h2><p>Validating how Amalé's pricing intelligence supports thredUP resale decisions.</p></div>
 
-  <p style="font-size:13px;color:var(--text-sec);max-width:640px;line-height:1.6;margin-bottom:24px">The first use case can validate how Amalé's pricing intelligence works with thredUP's resale ecosystem — testing item analysis, goal-based recommendations, and platform comparison with real marketplace data.</p>
+  <!-- Demo KPI cards -->
+  <div class="mini-kpi-grid">
+    <div class="mini-kpi"><div class="mk-v">250</div><div class="mk-l">Test items analyzed</div></div>
+    <div class="mini-kpi"><div class="mk-v">1,840</div><div class="mk-l">Matched comparables</div></div>
+    <div class="mini-kpi"><div class="mk-v">84%</div><div class="mk-l">Avg pricing confidence</div></div>
+    <div class="mini-kpi"><div class="mk-v copper">62%</div><div class="mk-l">Recommended to thredUP</div></div>
+    <div class="mini-kpi"><div class="mk-v copper">$28–$65</div><div class="mk-l">Sample payout range</div></div>
+  </div>
 
-  <div class="two-col-compare">
+  <!-- Role comparison -->
+  <div class="two-col-compare" style="margin-bottom:20px">
     <div class="compare-col" style="border-top:3px solid var(--green)">
       <h4 style="color:var(--green)">thredUP provides</h4>
       <div class="ci">Resale marketplace data</div>
@@ -997,7 +1064,21 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
     </div>
   </div>
 
-  <div class="bottomline"><p>thredUP becomes the focused validation partner. Amalé builds the pricing intelligence layer.</p></div>
+  <!-- Sample comparison table -->
+  <div class="scard" style="padding:0;overflow:hidden;margin-bottom:16px">
+    <div class="sh" style="padding:14px 18px"><h3>Sample Item Comparison</h3><span class="badge badge-copper">Demo Data</span></div>
+    <table class="demo-table">
+      <thead><tr><th>Item</th><th>Amalé Estimated Range</th><th>thredUP Demo Range</th><th>Confidence</th><th>Recommendation</th></tr></thead>
+      <tbody>
+        <tr><td>Polo Ralph Lauren Sweater</td><td>$28 – $65</td><td>$28 – $35</td><td><span class="badge badge-green">87%</span></td><td>Least Effort</td></tr>
+        <tr><td>Patagonia Fleece</td><td>$42 – $78</td><td>$38 – $52</td><td><span class="badge badge-green">91%</span></td><td>Strong Fit</td></tr>
+        <tr><td>Madewell Denim</td><td>$24 – $48</td><td>$22 – $36</td><td><span class="badge badge-green">82%</span></td><td>Good Fit</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bottomline"><p>The purpose is to test whether Amalé's pricing intelligence can support thredUP resale decisions with clearer item analysis, payout expectations, and goal-based recommendations.</p></div>
+  <div class="section-note">These are demo values for concept validation only.</div>
 </div>
 
 
@@ -1005,47 +1086,71 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 <div class="pg" id="pg-network">
   <div class="ph"><h2>Every item makes the intelligence layer stronger.</h2><p>More product data creates better resale intelligence.</p></div>
 
-  <p style="font-size:13px;color:var(--text-sec);max-width:640px;line-height:1.6;margin-bottom:28px">As more products are scanned, valued, compared, and sold, Amalé can improve pricing confidence, resale benchmarks, and recommendation quality across categories, brands, and platforms.</p>
-
-  <div class="loop-flow">
-    <div class="loop-step">More item scans</div>
-    <div class="loop-arrow">→</div>
-    <div class="loop-step">More resale value data</div>
-    <div class="loop-arrow">→</div>
-    <div class="loop-step">Better pricing intelligence</div>
+  <!-- Demo KPI cards -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">
+    <div class="mini-kpi"><div class="mk-v">12,847</div><div class="mk-l">Items scanned</div></div>
+    <div class="mini-kpi"><div class="mk-v">84,200</div><div class="mk-l">Comparable resale records</div></div>
+    <div class="mini-kpi"><div class="mk-v">1,240</div><div class="mk-l">Brands benchmarked</div></div>
   </div>
-  <div class="loop-flow">
-    <div class="loop-step">Stronger partner insights</div>
-    <div class="loop-arrow">←</div>
-    <div class="loop-step">Smarter recommendations</div>
-    <div class="loop-arrow">←</div>
-    <div class="loop-step" style="opacity:0;pointer-events:none">spacer</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px">
+    <div class="mini-kpi"><div class="mk-v">38</div><div class="mk-l">Categories analyzed</div></div>
+    <div class="mini-kpi"><div class="mk-v">9,312</div><div class="mk-l">Recommendations generated</div></div>
+    <div class="mini-kpi"><div class="mk-v copper">+18%</div><div class="mk-l">Avg confidence lift</div></div>
   </div>
 
-  <div style="margin-top:28px">
-    <div style="text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:14px">Partner Ecosystem</div>
-    <p style="font-size:13px;color:var(--text-sec);text-align:center;max-width:520px;margin:0 auto 20px;line-height:1.6">Amalé's pricing intelligence layer can support multiple circular commerce partners.</p>
-  </div>
-
-  <div class="ecosystem-hub">
-    <div class="eco-spokes">
-      <div class="eco-spoke"><span class="ei">🏪</span>Resale marketplaces</div>
-      <div class="eco-spoke"><span class="ei">👔</span>Brands and retailers</div>
-      <div class="eco-spoke"><span class="ei">♻️</span>Recommerce operators</div>
-      <div class="eco-spoke"><span class="ei">🔄</span>Trade-in programs</div>
+  <!-- Learning Loop -->
+  <div class="scard" style="padding:18px;margin-bottom:20px">
+    <div class="sh" style="margin-bottom:12px"><h3>Learning Loop</h3><span class="badge badge-brand">Simulated pricing signals</span></div>
+    <div class="loop-flow">
+      <div class="loop-step">Scan item</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Compare resale outcomes</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Update pricing benchmarks</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Improve recommendations</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Generate partner insights</div>
     </div>
-    <div class="eco-center">
-      <div class="ec-mark">A</div>
-      <div class="ec-label">Amalé Product<br>Intelligence</div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:20px">
+    <!-- Sample insight feed -->
+    <div class="scard" style="padding:18px">
+      <div class="sh"><h3>Sample Insight Feed</h3><span class="badge badge-copper">Demo Data</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="insight-item">Outerwear demand rising ahead of fall season</div>
+        <div class="insight-item">Cotton sweaters show stronger thredUP convenience fit</div>
+        <div class="insight-item">Luxury items show wider payout gaps across platforms</div>
+        <div class="insight-item">Condition score has highest impact on pricing confidence</div>
+      </div>
     </div>
-    <div class="eco-spokes">
-      <div class="eco-spoke"><span class="ei">📦</span>Logistics partners</div>
-      <div class="eco-spoke"><span class="ei">📊</span>Analytics / data partners</div>
-      <div class="eco-spoke"><span class="ei">🤝</span>Donation and nonprofit partners</div>
+
+    <!-- Partner ecosystem -->
+    <div class="scard" style="padding:18px">
+      <div class="sh"><h3>Partner Ecosystem</h3></div>
+      <div class="ecosystem-hub" style="margin:0">
+        <div class="eco-spokes">
+          <div class="eco-spoke"><span class="ei">🏪</span>Resale marketplaces</div>
+          <div class="eco-spoke"><span class="ei">👔</span>Brands and retailers</div>
+          <div class="eco-spoke"><span class="ei">♻️</span>Recommerce operators</div>
+          <div class="eco-spoke"><span class="ei">🔄</span>Trade-in programs</div>
+        </div>
+        <div class="eco-center" style="width:120px;height:120px">
+          <div class="ec-mark" style="font-size:22px">A</div>
+          <div class="ec-label">Amalé Product<br>Intelligence</div>
+        </div>
+        <div class="eco-spokes">
+          <div class="eco-spoke"><span class="ei">📦</span>Logistics partners</div>
+          <div class="eco-spoke"><span class="ei">📊</span>Analytics / data</div>
+          <div class="eco-spoke"><span class="ei">🤝</span>Donation / nonprofit</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="bottomline"><p>The consumer experience is the entry point. The partner ecosystem is the scale opportunity.</p></div>
+  <div class="section-note">Demo data for prototype view. Not connected to live marketplace data.</div>
 </div>
 
 
@@ -1053,7 +1158,16 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 <div class="pg" id="pg-strategy">
   <div class="ph"><h2>Immediate Goal: Next 6 Months</h2><p>Secure the thredUP partnership direction, validate the pricing model, and build the foundation for a standardized resale pricing platform.</p></div>
 
-  <div class="strategy-cards">
+  <!-- Prototype status -->
+  <div class="status-grid">
+    <div class="status-card"><div class="sc-l">Prototype Status</div><div class="sc-v"><span class="badge badge-green" style="font-size:11px;padding:4px 10px">Concept demo ready</span></div></div>
+    <div class="status-card"><div class="sc-l">Data Status</div><div class="sc-v"><span class="badge badge-copper" style="font-size:11px;padding:4px 10px">Demo / sample data only</span></div></div>
+    <div class="status-card"><div class="sc-l">Validation Focus</div><div class="sc-v">thredUP use case</div></div>
+    <div class="status-card"><div class="sc-l">Build Decision</div><div class="sc-v">Pending Shama / team review</div></div>
+  </div>
+
+  <!-- Strategy cards -->
+  <div class="strategy-cards" style="margin-bottom:20px">
     <div class="strat-card">
       <div class="sn">1</div>
       <div class="st">Validate pricing model</div>
@@ -1071,8 +1185,19 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
     </div>
   </div>
 
-  <div class="bottomline"><p>Start focused. Prove value. Build the foundation.</p></div>
+  <!-- Next actions -->
+  <div class="scard" style="padding:18px">
+    <div class="sh"><h3>Next Actions</h3><span class="badge badge-muted">Pending review</span></div>
+    <div class="action-list">
+      <div class="action-item"><span>Review consumer flow</span></div>
+      <div class="action-item"><span>Review Intelligence Console</span></div>
+      <div class="action-item"><span>Confirm thredUP-first strategy</span></div>
+      <div class="action-item"><span>Decide what to show clients</span></div>
+      <div class="action-item"><span>Decide whether to build in Base44 or continue static prototype</span></div>
+    </div>
+  </div>
 
+  <div class="bottomline"><p>Start focused. Prove value. Build the foundation.</p></div>
   <div class="section-note">Product data in. Resale value intelligence out.</div>
 </div>
 

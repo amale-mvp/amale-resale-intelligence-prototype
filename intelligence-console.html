@@ -9,7 +9,6 @@
  * Premium, warm, modern — consumer-friendly + enterprise-credible
  */
 
-
 :root {
   --bone:        #F5F1EB;
   --charcoal:    #1F2A24;
@@ -336,6 +335,77 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
 .hero-strip-text {
   font-size: 14px; font-weight: 600; color: var(--copper-light); letter-spacing: 0.2px;
 }
+
+/* ═══ Strategy Pages ═══ */
+.signal-ring {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  max-width: 520px; margin: 0 auto 20px;
+}
+.signal-chip {
+  padding: 10px 18px; background: var(--white); border: 1px solid var(--line);
+  border-radius: 10px; font-size: 12px; font-weight: 600; color: var(--charcoal);
+  box-shadow: var(--s);
+}
+.engine-core {
+  background: var(--green-deep); border-radius: 16px; padding: 28px 32px;
+  text-align: center; max-width: 520px; margin: 0 auto 20px;
+}
+.engine-core h3 { color: var(--copper-light); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.engine-core p { color: rgba(255,255,255,0.6); font-size: 12px; }
+.output-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 520px; margin: 0 auto 20px; }
+.output-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px; text-align: center; box-shadow: var(--s);
+}
+.output-card .ov { font-size: 13px; font-weight: 700; color: var(--green); }
+.output-card .ol { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+.two-col-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.compare-col {
+  background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+  padding: 24px; box-shadow: var(--s);
+}
+.compare-col h4 { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+.compare-col .ci { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 12px; color: var(--text-sec); line-height: 1.5; }
+.compare-col .ci::before { content: '·'; color: var(--copper); font-weight: 700; flex-shrink: 0; }
+.loop-flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; justify-content: center; margin: 20px 0; }
+.loop-step {
+  background: var(--white); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 18px; font-size: 12px; font-weight: 600; color: var(--charcoal);
+  box-shadow: var(--s); text-align: center; min-width: 150px;
+}
+.loop-arrow { font-size: 18px; color: var(--copper); padding: 0 6px; font-weight: 700; }
+.ecosystem-hub { display: flex; align-items: center; gap: 24px; margin: 20px 0; }
+.eco-spokes { display: grid; grid-template-columns: 1fr; gap: 8px; flex: 1; }
+.eco-spoke {
+  padding: 12px 16px; background: var(--white); border: 1px solid var(--line);
+  border-radius: 10px; font-size: 12px; font-weight: 500; color: var(--charcoal);
+  box-shadow: var(--s); display: flex; align-items: center; gap: 8px;
+}
+.eco-spoke .ei { font-size: 14px; }
+.eco-center {
+  width: 160px; height: 160px; border-radius: 50%; background: var(--green-deep);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.eco-center .ec-mark { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--copper); }
+.eco-center .ec-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 4px; text-align: center; line-height: 1.3; }
+.strategy-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.strat-card {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 22px; box-shadow: var(--s);
+}
+.strat-card .sn { font-size: 28px; font-weight: 800; color: var(--copper); margin-bottom: 6px; }
+.strat-card .st { font-size: 13px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+.strat-card .sd { font-size: 11px; color: var(--text-sec); line-height: 1.5; }
+.bottomline {
+  background: var(--green-deep); border-radius: 12px; padding: 16px 24px;
+  margin-top: 20px; text-align: center;
+}
+.bottomline p { font-size: 13px; font-weight: 600; color: var(--copper-light); }
+.section-note {
+  text-align: center; padding: 12px; font-size: 12px; color: var(--text-muted);
+  font-style: italic; margin-top: 16px;
+}
 </style>
 </head>
 <body>
@@ -398,6 +468,13 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
     <button class="sb-link" data-pg="partner"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>Partner / API</button>
     <button class="sb-link" data-pg="reports"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Reports</button>
     <button class="sb-link" data-pg="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</button>
+    <div style="margin:8px 12px;border-top:1px solid rgba(255,255,255,0.08);padding-top:8px">
+      <div style="font-size:8px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.25);font-weight:600;padding:0 0 6px 0">Strategy</div>
+    </div>
+    <button class="sb-link" data-pg="pricingmodel"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Pricing Model</button>
+    <button class="sb-link" data-pg="thredup"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>thredUP Use Case</button>
+    <button class="sb-link" data-pg="network"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg>Network Effect</button>
+    <button class="sb-link" data-pg="strategy"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>Strategy</button>
   </nav>
   <div class="sb-foot">
     <div class="env">Workspace</div>
@@ -854,6 +931,149 @@ body { background: var(--bone); display: flex; min-height: 100vh; }
   <div style="text-align:center;margin-top:24px;padding:16px">
     <div style="font-size:10px;color:var(--text-muted);line-height:1.6"><strong style="color:var(--text-sec)">Amalé Product Intelligence</strong><br>Product data in. Resale value intelligence out.</div>
   </div>
+</div>
+
+
+<!-- ═══════════════ 10. PRICING MODEL ═══════════════ -->
+<div class="pg" id="pg-pricingmodel">
+  <div class="ph"><h2>Standardized Resale Pricing Model</h2><p>One item. Multiple signals. One trusted pricing recommendation.</p></div>
+
+  <p style="font-size:13px;color:var(--text-sec);max-width:640px;line-height:1.6;margin-bottom:24px">Amalé combines item attributes, condition, market demand, comparable resale activity, seasonality, and platform rules to produce a trusted resale value range.</p>
+
+  <div style="text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px">Pricing Signals</div>
+  <div class="signal-ring">
+    <div class="signal-chip">Item Attributes</div>
+    <div class="signal-chip">Condition</div>
+    <div class="signal-chip">Market Demand</div>
+    <div class="signal-chip">Comparable Sales</div>
+    <div class="signal-chip">Platform Rules</div>
+    <div class="signal-chip">Seasonality</div>
+    <div class="signal-chip">Historical Resale Data</div>
+  </div>
+
+  <div style="text-align:center;margin:8px 0"><svg width="20" height="24" style="color:var(--copper)"><path d="M10 0v18M4 14l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2"/></svg></div>
+
+  <div class="engine-core">
+    <div style="width:40px;height:40px;background:var(--copper);border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:white;margin-bottom:10px">A</div>
+    <h3>Amalé Product Intelligence Engine</h3>
+    <p>Product data in. Resale value intelligence out.</p>
+  </div>
+
+  <div style="text-align:center;margin:8px 0"><svg width="20" height="24" style="color:var(--copper)"><path d="M10 0v18M4 14l6 6 6-6" stroke="currentColor" fill="none" stroke-width="2"/></svg></div>
+
+  <div class="output-cards">
+    <div class="output-card"><div class="ov">$28 – $65</div><div class="ol">Trusted Resale Value Range</div></div>
+    <div class="output-card"><div class="ov">87%</div><div class="ol">Pricing Confidence</div></div>
+    <div class="output-card"><div class="ov">thredUP</div><div class="ol">Recommended Resale Path</div></div>
+  </div>
+
+  <div class="bottomline"><p>One item. Multiple signals. One trusted pricing recommendation.</p></div>
+</div>
+
+
+<!-- ═══════════════ 11. THREDUP USE CASE ═══════════════ -->
+<div class="pg" id="pg-thredup">
+  <div class="ph"><h2>Focused thredUP Use Case</h2><p>Validating how Amalé's pricing intelligence works within thredUP's resale ecosystem.</p></div>
+
+  <p style="font-size:13px;color:var(--text-sec);max-width:640px;line-height:1.6;margin-bottom:24px">The first use case can validate how Amalé's pricing intelligence works with thredUP's resale ecosystem — testing item analysis, goal-based recommendations, and platform comparison with real marketplace data.</p>
+
+  <div class="two-col-compare">
+    <div class="compare-col" style="border-top:3px solid var(--green)">
+      <h4 style="color:var(--green)">thredUP provides</h4>
+      <div class="ci">Resale marketplace data</div>
+      <div class="ci">Payout and acceptance rules</div>
+      <div class="ci">Platform behavior insights</div>
+      <div class="ci">Performance feedback</div>
+      <div class="ci">Go-to-market partner context</div>
+    </div>
+    <div class="compare-col" style="border-top:3px solid var(--copper)">
+      <h4 style="color:var(--copper)">Amalé provides</h4>
+      <div class="ci">Product intelligence model</div>
+      <div class="ci">Standardized resale pricing logic</div>
+      <div class="ci">Item analysis workflow</div>
+      <div class="ci">Pricing confidence layer</div>
+      <div class="ci">Consumer recommendation experience</div>
+      <div class="ci">Intelligence Console analytics</div>
+    </div>
+  </div>
+
+  <div class="bottomline"><p>thredUP becomes the focused validation partner. Amalé builds the pricing intelligence layer.</p></div>
+</div>
+
+
+<!-- ═══════════════ 12. NETWORK EFFECT ═══════════════ -->
+<div class="pg" id="pg-network">
+  <div class="ph"><h2>Every item makes the intelligence layer stronger.</h2><p>More product data creates better resale intelligence.</p></div>
+
+  <p style="font-size:13px;color:var(--text-sec);max-width:640px;line-height:1.6;margin-bottom:28px">As more products are scanned, valued, compared, and sold, Amalé can improve pricing confidence, resale benchmarks, and recommendation quality across categories, brands, and platforms.</p>
+
+  <div class="loop-flow">
+    <div class="loop-step">More item scans</div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-step">More resale value data</div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-step">Better pricing intelligence</div>
+  </div>
+  <div class="loop-flow">
+    <div class="loop-step">Stronger partner insights</div>
+    <div class="loop-arrow">←</div>
+    <div class="loop-step">Smarter recommendations</div>
+    <div class="loop-arrow">←</div>
+    <div class="loop-step" style="opacity:0;pointer-events:none">spacer</div>
+  </div>
+
+  <div style="margin-top:28px">
+    <div style="text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:14px">Partner Ecosystem</div>
+    <p style="font-size:13px;color:var(--text-sec);text-align:center;max-width:520px;margin:0 auto 20px;line-height:1.6">Amalé's pricing intelligence layer can support multiple circular commerce partners.</p>
+  </div>
+
+  <div class="ecosystem-hub">
+    <div class="eco-spokes">
+      <div class="eco-spoke"><span class="ei">🏪</span>Resale marketplaces</div>
+      <div class="eco-spoke"><span class="ei">👔</span>Brands and retailers</div>
+      <div class="eco-spoke"><span class="ei">♻️</span>Recommerce operators</div>
+      <div class="eco-spoke"><span class="ei">🔄</span>Trade-in programs</div>
+    </div>
+    <div class="eco-center">
+      <div class="ec-mark">A</div>
+      <div class="ec-label">Amalé Product<br>Intelligence</div>
+    </div>
+    <div class="eco-spokes">
+      <div class="eco-spoke"><span class="ei">📦</span>Logistics partners</div>
+      <div class="eco-spoke"><span class="ei">📊</span>Analytics / data partners</div>
+      <div class="eco-spoke"><span class="ei">🤝</span>Donation and nonprofit partners</div>
+    </div>
+  </div>
+
+  <div class="bottomline"><p>The consumer experience is the entry point. The partner ecosystem is the scale opportunity.</p></div>
+</div>
+
+
+<!-- ═══════════════ 13. STRATEGY ═══════════════ -->
+<div class="pg" id="pg-strategy">
+  <div class="ph"><h2>Immediate Goal: Next 6 Months</h2><p>Secure the thredUP partnership direction, validate the pricing model, and build the foundation for a standardized resale pricing platform.</p></div>
+
+  <div class="strategy-cards">
+    <div class="strat-card">
+      <div class="sn">1</div>
+      <div class="st">Validate pricing model</div>
+      <div class="sd">Test the standardized resale pricing model with real item data, condition grading, comparable sales, and platform rules.</div>
+    </div>
+    <div class="strat-card">
+      <div class="sn">2</div>
+      <div class="st">Test thredUP use case</div>
+      <div class="sd">Run the focused thredUP partnership use case to validate item analysis, goal-based recommendations, and platform comparison.</div>
+    </div>
+    <div class="strat-card">
+      <div class="sn">3</div>
+      <div class="st">Build partner-ready intelligence layer</div>
+      <div class="sd">Develop the Intelligence Console, API layer, and reporting infrastructure that can serve future partners across circular commerce.</div>
+    </div>
+  </div>
+
+  <div class="bottomline"><p>Start focused. Prove value. Build the foundation.</p></div>
+
+  <div class="section-note">Product data in. Resale value intelligence out.</div>
 </div>
 
   </div><!-- content -->
